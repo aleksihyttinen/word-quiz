@@ -8,3 +8,7 @@ const connection = mysql.createPool({
   password: process.env.PASSWORD,
   database: process.env.DB,
 });
+
+let connectionFuncs = {};
+
+module.exports = connectionFuncs;

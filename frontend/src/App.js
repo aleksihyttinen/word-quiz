@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
+import { ListGroup, Button } from "react-bootstrap";
 const axios = require("axios").default;
 function App() {
   const [words1, setWords1] = useState([]);
@@ -8,6 +8,7 @@ function App() {
     first: "english",
     second: "finnish",
   });
+  let userWords = [];
   useEffect(() => {
     axios
       .get(`http://localhost:8080/${languages.first}`)
@@ -24,6 +25,10 @@ function App() {
         console.log(error);
       });
   }, [languages.second]);
+  const handleChange = (e) => {
+    userWords[e.target.id] = e.target.value;
+    console.log(userWords);
+  };
   return (
     <div className="App">
       {languages.first}
@@ -34,9 +39,16 @@ function App() {
       </ListGroup>
       {languages.second}
       <ListGroup>
-        {words2.map((word) => (
+        {words2.map((word, index) => (
           <ListGroup.Item>
-            <input type="text" id={word.word} name={word.word} key={word.id} />
+            <input
+              onChange={handleChange}
+              type="text"
+              autoComplete="off"
+              id={index}
+              name={word.word}
+              key={word.id}
+            />
           </ListGroup.Item>
         ))}
       </ListGroup>

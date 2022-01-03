@@ -35,7 +35,9 @@ function App() {
       {languages.second}
       <ListGroup>
         {words2.map((word) => (
-          <ListGroup.Item key={word.id}>{word.word}</ListGroup.Item>
+          <ListGroup.Item>
+            <input type="text" id={word.word} name={word.word} key={word.id} />
+          </ListGroup.Item>
         ))}
       </ListGroup>
     </div>

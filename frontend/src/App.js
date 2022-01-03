@@ -8,7 +8,7 @@ function App() {
     first: "english",
     second: "finnish",
   });
-  let userWords = [];
+  var userWords = [];
   useEffect(() => {
     axios
       .get(`http://localhost:8080/${languages.first}`)
@@ -29,6 +29,21 @@ function App() {
     userWords[e.target.id] = e.target.value;
     console.log(userWords);
   };
+  const checkAnswers = () => {
+    if (userWords.length === 0) {
+      alert("Please insert your answers");
+    } else {
+      let count = 0;
+      for (let i = 0; i < words2.length; i++) {
+        if (userWords[i] !== undefined) {
+          if (words2[i].word.toLowerCase() === userWords[i].toLowerCase()) {
+            count++;
+          }
+        }
+      }
+      alert(`You got ${count} right!`);
+    }
+  };
   return (
     <div className="App">
       {languages.first}
@@ -40,18 +55,20 @@ function App() {
       {languages.second}
       <ListGroup>
         {words2.map((word, index) => (
-          <ListGroup.Item>
+          <ListGroup.Item key={word.id}>
             <input
               onChange={handleChange}
               type="text"
               autoComplete="off"
               id={index}
               name={word.word}
-              key={word.id}
             />
           </ListGroup.Item>
         ))}
       </ListGroup>
+      <Button variant="primary" onClick={checkAnswers}>
+        Check answers
+      </Button>
     </div>
   );
 }

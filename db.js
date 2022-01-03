@@ -22,6 +22,16 @@ let connectionFuncs = {
       resolve("Connection closed");
     });
   },
+  getAll: (language) => {
+    return new Promise((resolve, reject) => {
+      connection.query(`SELECT * FROM ${language}`, (err, words) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(words);
+      });
+    });
+  },
 };
 
 module.exports = connectionFuncs;

@@ -16,6 +16,12 @@ let connectionFuncs = {
       resolve("Connected successfully");
     });
   },
+  close: () => {
+    return new Promise((resolve, reject) => {
+      connection.end((err) => reject(err));
+      resolve("Connection closed");
+    });
+  },
 };
 
 module.exports = connectionFuncs;

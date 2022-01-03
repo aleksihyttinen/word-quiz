@@ -9,6 +9,13 @@ const connection = mysql.createPool({
   database: process.env.DB,
 });
 
-let connectionFuncs = {};
+let connectionFuncs = {
+  connect: () => {
+    return new Promise((resolve, reject) => {
+      connection.getConnection((err) => reject(err));
+      resolve("Connected successfully");
+    });
+  },
+};
 
 module.exports = connectionFuncs;

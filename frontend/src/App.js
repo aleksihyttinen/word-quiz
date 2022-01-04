@@ -1,9 +1,11 @@
 import "./App.css";
-import StudentView from "./StudentView.js";
+import Button from "react-bootstrap/Button";
 function App() {
   return (
     <div className="app">
-      <StudentView />
+      <h1>Welcome to the word quiz app. Please select your role:</h1>
+      <Button href="/student">Student</Button>
+      <Button href="/teacher">Teacher</Button>
     </div>
   );
 }

@@ -7,7 +7,6 @@ function App() {
   const [words1, setWords1] = useState([]);
   const [words2, setWords2] = useState([]);
   const languages = ["english", "finnish", "swedish"];
-  console.log(languages);
   const [displayedLanguages, setDisplayedLanguages] = useState({
     first: languages[0],
     second: languages[1],
@@ -31,7 +30,6 @@ function App() {
   }, [displayedLanguages.second]);
   const handleChange = (e) => {
     userWords[e.target.id] = e.target.value;
-    console.log(userWords);
   };
   const checkAnswers = () => {
     if (userWords.length === 0) {
@@ -53,9 +51,11 @@ function App() {
       <div className="list-group-holder">
         <div className="words">
           <LanguageSelection
-            setLanguages={setDisplayedLanguages}
+            setDisplayedLanguages={setDisplayedLanguages}
+            displayedLanguages={displayedLanguages}
             languages={languages}
             selected={displayedLanguages.first}
+            whichList={"first"}
           />
           <ListGroup>
             {words1.map((word) => (
@@ -65,9 +65,11 @@ function App() {
         </div>
         <div className="input">
           <LanguageSelection
-            setLanguages={setDisplayedLanguages}
+            setDisplayedLanguages={setDisplayedLanguages}
+            displayedLanguages={displayedLanguages}
             languages={languages}
             selected={displayedLanguages.second}
+            whichList={"second"}
           />
           <ListGroup>
             {words2.map((word, index) => (

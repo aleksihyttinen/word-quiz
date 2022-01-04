@@ -1,6 +1,8 @@
 import LanguageSelection from "./LanguageSelection.js";
 import { ListGroup } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import AddWord from "./AddWord.js";
+
 const axios = require("axios").default;
 export default function TeacherView() {
   const [words, setWords] = useState([]);
@@ -32,6 +34,7 @@ export default function TeacherView() {
           </ListGroup>
         </div>
       </div>
+      <AddWord />
     </div>
   );
 }

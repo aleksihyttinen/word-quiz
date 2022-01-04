@@ -1,11 +1,15 @@
 export default function LanguageSelection(props) {
   const changeLanguage = (e) => {
+    if (props.whichList === undefined) {
+      props.setDisplayedLanguage(e.target.value);
+    }
     if (props.whichList === "first") {
       props.setDisplayedLanguages({
         first: e.target.value,
         second: props.displayedLanguages.second,
       });
-    } else {
+    }
+    if (props.whichList === "second") {
       props.setDisplayedLanguages({
         first: props.displayedLanguages.first,
         second: e.target.value,

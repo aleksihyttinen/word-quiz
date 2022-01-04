@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { ListGroup, Button } from "react-bootstrap";
 import "./App.css";
-import LanguageSelection from "./LanguageSelection";
+import LanguageSelection from "./LanguageSelection.js";
+import Answer from "./Answer.js";
 const axios = require("axios").default;
 function App() {
   const [words1, setWords1] = useState([]);
@@ -24,13 +25,8 @@ function App() {
     axios
       .get(`http://localhost:8080/${displayedLanguages.second}`)
       .then((response) => setWords2(response.data))
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }, [displayedLanguages.second]);
-  const handleChange = (e) => {
-    userWords[e.target.id] = e.target.value;
-  };
   const checkAnswers = () => {
     if (userWords.length === 0) {
       alert("Please insert your answers");
@@ -74,13 +70,7 @@ function App() {
           <ListGroup>
             {words2.map((word, index) => (
               <ListGroup.Item key={word.id}>
-                <input
-                  onChange={handleChange}
-                  type="text"
-                  autoComplete="off"
-                  id={index}
-                  name={word.word}
-                />
+                <Answer userWords={userWords} index={index} word={word} />
               </ListGroup.Item>
             ))}
           </ListGroup>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ListGroup, Button } from "react-bootstrap";
+import "./App.css";
 const axios = require("axios").default;
 function App() {
   const [words1, setWords1] = useState([]);
@@ -45,30 +46,34 @@ function App() {
     }
   };
   return (
-    <div className="App">
-      {languages.first}
-      <ListGroup>
-        {words1.map((word) => (
-          <ListGroup.Item key={word.id}>{word.word}</ListGroup.Item>
-        ))}
-      </ListGroup>
-      {languages.second}
-      <ListGroup>
-        {words2.map((word, index) => (
-          <ListGroup.Item key={word.id}>
-            <input
-              onChange={handleChange}
-              type="text"
-              autoComplete="off"
-              id={index}
-              name={word.word}
-            />
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-      <Button variant="primary" onClick={checkAnswers}>
-        Check answers
-      </Button>
+    <div className="app">
+      <div className="list-group-holder">
+        <div className="words">
+          {languages.first}
+          <ListGroup>
+            {words1.map((word) => (
+              <ListGroup.Item key={word.id}>{word.word}</ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
+        <div className="input">
+          {languages.second}
+          <ListGroup>
+            {words2.map((word, index) => (
+              <ListGroup.Item key={word.id}>
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  autoComplete="off"
+                  id={index}
+                  name={word.word}
+                />
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
+      </div>
+      <Button onClick={checkAnswers}>Check answers</Button>
     </div>
   );
 }

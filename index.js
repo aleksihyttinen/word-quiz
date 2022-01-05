@@ -17,6 +17,19 @@ app.get("/:language", async (req, res) => {
     res.end();
   }
 });
+app.post("/", async (req, res) => {
+  let word = req.body;
+  try {
+    console.log(word);
+    let addedWord = await connection.postWord(word);
+    res.statusCode = 201;
+    res.send(addedWord);
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 400;
+    res.end();
+  }
+});
 
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {

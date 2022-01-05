@@ -1,10 +1,14 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useState } from "react";
+const axios = require("axios").default;
 export default function AddWord() {
   const [showModal, setShow] = useState(false);
   let word = [];
   const saveWord = () => {
-    console.log(word);
+    axios
+      .post(`http://localhost:8080/`, word)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
   return (
     <>

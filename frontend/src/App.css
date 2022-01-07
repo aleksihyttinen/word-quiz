@@ -37,3 +37,9 @@
   text-align: center;
   padding-top: 100px;
 }
+.react-icons {
+  float: right;
+  vertical-align: middle;
+  margin-left: 10px;
+  cursor: pointer;
+}

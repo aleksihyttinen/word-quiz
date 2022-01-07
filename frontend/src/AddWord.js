@@ -9,6 +9,7 @@ export default function AddWord() {
       .post(`http://localhost:8080/`, word)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
+    setShow(false);
   };
   return (
     <>
@@ -42,7 +43,7 @@ export default function AddWord() {
             Close
           </Button>
           <Button variant="primary" onClick={saveWord}>
-            Save Changes
+            Add word
           </Button>
         </Modal.Footer>
       </Modal>

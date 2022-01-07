@@ -41,7 +41,7 @@ let connectionFuncs = {
           if (err) {
             reject(err);
           }
-          resolve(result);
+          resolve(result.insertId);
         }
       );
     });
@@ -71,6 +71,21 @@ let connectionFuncs = {
           }
           if (result.affectedRows == 0) {
             reject("Id not found");
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
+  editWord: (id, word) => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `UPDATE words SET english = ?, finnish = ?, swedish = ? WHERE words.id = ${id}`,
+        word,
+        (err, result) => {
+          if (err) {
+            reject(err);
           } else {
             resolve(result);
           }

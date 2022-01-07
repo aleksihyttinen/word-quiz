@@ -5,6 +5,7 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("frontend/build"));
 
 app.get("/:language", async (req, res) => {
   let language = req.params.language;

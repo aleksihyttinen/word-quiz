@@ -24,11 +24,11 @@ let connectionFuncs = {
   },
   getAll: (language) => {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id, ${language} AS word FROM words`, (err, words) => {
+      pool.query(`SELECT id, ${language} AS word FROM words`, (err, result) => {
         if (err) {
           reject(err);
         }
-        resolve(words);
+        resolve(result);
       });
     });
   },
@@ -58,6 +58,24 @@ let connectionFuncs = {
           resolve(`Deleted id: ${id} successfully`);
         }
       });
+    });
+  },
+  getById: (id) => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT * FROM words WHERE words.id = ?`,
+        id,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          }
+          if (result.affectedRows == 0) {
+            reject("Id not found");
+          } else {
+            resolve(result);
+          }
+        }
+      );
     });
   },
 };

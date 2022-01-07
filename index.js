@@ -17,6 +17,17 @@ app.get("/:language", async (req, res) => {
     res.end();
   }
 });
+app.get("/id/:id", async (req, res) => {
+  let id = req.params.id;
+  try {
+    let data = await connection.getById(id);
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 404;
+    res.end();
+  }
+});
 app.post("/", async (req, res) => {
   let word = req.body;
   try {

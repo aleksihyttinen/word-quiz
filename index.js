@@ -20,7 +20,6 @@ app.get("/:language", async (req, res) => {
 app.post("/", async (req, res) => {
   let word = req.body;
   try {
-    console.log(word);
     let addedWord = await connection.postWord(word);
     res.statusCode = 201;
     res.send(addedWord);
@@ -28,6 +27,20 @@ app.post("/", async (req, res) => {
     console.log(err);
     res.statusCode = 400;
     res.end();
+  }
+});
+app.delete("/:id", async (req, res) => {
+  let id = req.params.id;
+  try {
+    let result = await connection.deleteWord(id);
+    res.send(result);
+    res.end();
+  } catch (err) {
+    console.log(err);
+    if (err == "Id not found") {
+      res.statusCode = 404;
+      res.end();
+    }
   }
 });
 

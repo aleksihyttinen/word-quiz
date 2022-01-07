@@ -92,5 +92,23 @@ let connectionFuncs = {
       });
     });
   },
+  deleteWord: (id) => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `DELETE english, finnish, swedish FROM english INNER JOIN finnish ON english.id = finnish.id INNER JOIN swedish ON english.id = swedish.id WHERE english.id = ?`,
+        id,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          }
+          if (result.affectedRows == 0) {
+            reject("Id not found");
+          } else {
+            resolve(`Deleted id: ${id} successfully`);
+          }
+        }
+      );
+    });
+  },
 };
 module.exports = connectionFuncs;

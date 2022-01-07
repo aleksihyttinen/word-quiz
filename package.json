@@ -4,7 +4,8 @@
   "description": "This project is a language learning app that I am building for my backend course. The backend will be coded with Node.js and the frontend with React.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

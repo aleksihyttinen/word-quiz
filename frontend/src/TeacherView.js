@@ -3,9 +3,8 @@ import { ListGroup } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import AddWord from "./AddWord.js";
 import { GrClose } from "react-icons/gr";
-import { BsPencil } from "react-icons/bs";
 import { IconContext } from "react-icons";
-// import EditWord from "./EditWord.js";
+import EditWord from "./EditWord.js";
 const axios = require("axios").default;
 export default function TeacherView() {
   const [words, setWords] = useState([]);
@@ -40,9 +39,6 @@ export default function TeacherView() {
       return;
     }
   };
-  const editWord = () => {
-    setEdited(true);
-  };
 
   return (
     <div className="teacher-view">
@@ -60,15 +56,14 @@ export default function TeacherView() {
                 {word.word}
                 <IconContext.Provider value={{ className: "react-icons" }}>
                   <GrClose size="20px" onClick={() => removeWord(word.id)} />
-                  <BsPencil size="20px" onClick={editWord} />
+                  <EditWord id={word.id} setEdited={setEdited} />
                 </IconContext.Provider>
               </ListGroup.Item>
             ))}
           </ListGroup>
         </div>
       </div>
-      <AddWord />
-      {/* <EditWord /> */}
+      <AddWord setEdited={setEdited} />
     </div>
   );
 }

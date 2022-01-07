@@ -24,7 +24,7 @@ let connectionFuncs = {
   },
   getAll: (language) => {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM ${language}`, (err, words) => {
+      pool.query(`SELECT id, ${language} AS word FROM words`, (err, words) => {
         if (err) {
           reject(err);
         }
@@ -34,80 +34,30 @@ let connectionFuncs = {
   },
   postWord: (word) => {
     return new Promise((resolve, reject) => {
-      pool.getConnection((err, conn) => {
-        if (err) {
-          reject(err);
-        }
-        conn.beginTransaction((err) => {
-          if (err) {
-            reject(err);
-          }
-
-          conn.query(
-            `INSERT INTO english (word) VALUES (?)`,
-            word[0],
-            (err) => {
-              if (err) {
-                return conn.rollback(() => {
-                  reject(err);
-                });
-              }
-
-              conn.query(
-                `INSERT INTO finnish (word) VALUES (?)`,
-                word[1],
-                (err) => {
-                  if (err) {
-                    return conn.rollback(() => {
-                      reject(err);
-                    });
-                  }
-
-                  conn.query(
-                    `INSERT INTO swedish (word) VALUES (?)`,
-                    word[2],
-                    (err) => {
-                      if (err) {
-                        return conn.rollback(() => {
-                          reject(err);
-                        });
-                      }
-
-                      conn.commit((err, response) => {
-                        if (err) {
-                          return conn.rollback(() => {
-                            reject(err);
-                          });
-                        }
-                        console.log(response);
-                        resolve(`Posted word successfully!`);
-                      });
-                    }
-                  );
-                }
-              );
-            }
-          );
-        });
-      });
-    });
-  },
-  deleteWord: (id) => {
-    return new Promise((resolve, reject) => {
       pool.query(
-        `DELETE english, finnish, swedish FROM english INNER JOIN finnish ON english.id = finnish.id INNER JOIN swedish ON english.id = swedish.id WHERE english.id = ?`,
-        id,
+        `INSERT INTO words (english, finnish, swedish) VALUES (?,?,?)`,
+        word,
         (err, result) => {
           if (err) {
             reject(err);
           }
-          if (result.affectedRows == 0) {
-            reject("Id not found");
-          } else {
-            resolve(`Deleted id: ${id} successfully`);
-          }
+          resolve(result);
         }
       );
+    });
+  },
+  deleteWord: (id) => {
+    return new Promise((resolve, reject) => {
+      pool.query(`DELETE FROM words WHERE words.id = ?`, id, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        if (result.affectedRows == 0) {
+          reject("Id not found");
+        } else {
+          resolve(`Deleted id: ${id} successfully`);
+        }
+      });
     });
   },
 };

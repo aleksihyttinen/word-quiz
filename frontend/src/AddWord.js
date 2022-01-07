@@ -24,27 +24,30 @@ export default function AddWord(props) {
         <Form>
           <Form.Group className="add-word" controlId="formAddWord">
             <Form.Label>Type your word in all three languages</Form.Label>
-            <Form.Control
-              onChange={(e) => (word[0] = e.target.value)}
-              style={{ marginBottom: 10 }}
-              placeholder="English"
-            />
-            <Form.Control
-              onChange={(e) => (word[1] = e.target.value)}
-              style={{ marginBottom: 10 }}
-              placeholder="Finnish"
-            />
-            <Form.Control
-              onChange={(e) => (word[2] = e.target.value)}
-              style={{ marginBottom: 10 }}
-              placeholder="Swedish"
-            />
+            <br />
+            <div style={{ fontWeight: "bold" }}>
+              <Form.Label>English:</Form.Label>
+              <Form.Control
+                onChange={(e) => (word[0] = e.target.value)}
+                style={{ marginBottom: 10 }}
+                placeholder="English"
+              />
+              <Form.Label>Finnish:</Form.Label>
+              <Form.Control
+                onChange={(e) => (word[1] = e.target.value)}
+                style={{ marginBottom: 10 }}
+                placeholder="Finnish"
+              />
+              <Form.Label>Swedish:</Form.Label>
+              <Form.Control
+                onChange={(e) => (word[2] = e.target.value)}
+                style={{ marginBottom: 10 }}
+                placeholder="Swedish"
+              />
+            </div>
           </Form.Group>
         </Form>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Close
-          </Button>
           <Button variant="primary" onClick={saveWord}>
             Add word
           </Button>

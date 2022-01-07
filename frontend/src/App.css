@@ -43,3 +43,16 @@
   margin-left: 10px;
   cursor: pointer;
 }
+.form-label {
+  margin-left: 1rem;
+}
+.form-control {
+  margin-left: 1rem;
+  width: 400px;
+}
+.modal-header {
+  margin-bottom: 1rem;
+}
+.modal-footer {
+  margin-top: 1rem;
+}

@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "webpack",
-    "heroku-postbuild": "echo Skip build on Heroku"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,6 +28,5 @@
     "jsonschema": "^1.4.0",
     "mysql": "^2.18.1",
     "react-router-dom": "^6.2.1"
-  },
-  "heroku-run-build-script": true
+  }
 }

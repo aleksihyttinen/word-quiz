@@ -2,12 +2,13 @@ const express = require("express");
 const app = express();
 const connection = require("./db.js");
 const cors = require("cors");
+const path = require("path");
 
 app.use(express.json());
 app.use(cors());
 app.use(express.static("frontend/build"));
 
-app.get("/language/:language", async (req, res) => {
+app.get("/api/:language", async (req, res) => {
   let language = req.params.language;
   try {
     let data = await connection.getAll(language);
@@ -18,7 +19,7 @@ app.get("/language/:language", async (req, res) => {
     res.end();
   }
 });
-app.get("/id/:id", async (req, res) => {
+app.get("/api/:id", async (req, res) => {
   let id = req.params.id;
   try {
     let data = await connection.getById(id);
@@ -29,7 +30,7 @@ app.get("/id/:id", async (req, res) => {
     res.end();
   }
 });
-app.post("/", async (req, res) => {
+app.post("/api", async (req, res) => {
   let word = req.body;
   try {
     let insertId = await connection.postWord(word);
@@ -46,7 +47,7 @@ app.post("/", async (req, res) => {
     res.end();
   }
 });
-app.delete("/:id", async (req, res) => {
+app.delete("/api/:id", async (req, res) => {
   let id = req.params.id;
   try {
     let result = await connection.deleteWord(id);
@@ -61,7 +62,7 @@ app.delete("/:id", async (req, res) => {
     }
   }
 });
-app.put("/:id", async (req, res) => {
+app.put("/api/:id", async (req, res) => {
   let id = req.params.id;
   let word = req.body;
   try {
@@ -79,6 +80,9 @@ app.put("/:id", async (req, res) => {
     res.statusCode = 404;
     res.end();
   }
+});
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
 });
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {

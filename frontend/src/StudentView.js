@@ -14,15 +14,18 @@ export default function StudentView(props) {
   var userWords = [];
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/language/${displayedLanguages.first}`)
-      .then((response) => setWords1(response.data))
+      .get(`http://localhost:8080/api/${displayedLanguages.first}`)
+      .then((response) => {
+        console.log(response.data);
+        setWords1(response.data);
+      })
       .catch((error) => {
         console.log(error);
       });
   }, [displayedLanguages.first]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/language/${displayedLanguages.second}`)
+      .get(`http://localhost:8080/api/${displayedLanguages.second}`)
       .then((response) => setWords2(response.data))
       .catch((error) => console.log(error));
   }, [displayedLanguages.second]);

@@ -1,33 +1,29 @@
-import { createContext, useState, useContext } from "react";
-
+import React, { useState, useContext, createContext } from "react";
 const authContext = createContext();
 
-function useAuth() {
-  const [authed, setAuthed] = useState(false);
-
-  return {
-    authed,
-    login() {
-      return new Promise((res) => {
-        setAuthed(true);
-        res();
-      });
-    },
-    logout() {
-      return new Promise((res) => {
-        setAuthed(false);
-        res();
-      });
-    },
-  };
-}
-
-export function AuthProvider({ children }) {
-  const auth = useAuth();
-
+export function ProvideAuth({ children }) {
+  const auth = useProvideAuth();
+  console.log(auth);
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
-export default function AuthConsumer() {
+export const useAuth = () => {
   return useContext(authContext);
+};
+
+function useProvideAuth() {
+  const [auth, setAuth] = useState(false);
+
+  const signin = () => {
+    setAuth(true);
+  };
+  const signout = () => {
+    setAuth(false);
+  };
+
+  return {
+    auth,
+    signin,
+    signout,
+  };
 }

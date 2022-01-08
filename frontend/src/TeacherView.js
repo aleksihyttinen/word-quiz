@@ -13,7 +13,7 @@ export default function TeacherView() {
   const [edited, setEdited] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${displayedLanguage}`)
+      .get(`/api/${displayedLanguage}`)
       .then((response) => {
         setWords(response.data);
         setEdited(false);
@@ -29,7 +29,7 @@ export default function TeacherView() {
       )
     ) {
       axios
-        .delete(`http://localhost:8080/api/${id}`)
+        .delete(`/api/${id}`)
         .then((response) => {
           console.log(response);
           setEdited(true);

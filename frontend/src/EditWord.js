@@ -8,7 +8,7 @@ export default function EditWord(props) {
   let newWord = [];
   const editWord = () => {
     axios
-      .put(`http://localhost:8080/api/${props.id}`, newWord)
+      .put(`/api/${props.id}`, newWord)
       .then((response) => {
         props.setEdited(true);
         console.log(response);
@@ -18,7 +18,7 @@ export default function EditWord(props) {
   };
   const getWords = () => {
     axios
-      .get(`http://localhost:8080/api/${props.id}`)
+      .get(`/api/${props.id}`)
       .then((response) => {
         setWord(response.data);
         console.log(word);

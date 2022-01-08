@@ -6,7 +6,7 @@ export default function AddWord(props) {
   let word = [];
   const saveWord = () => {
     axios
-      .post(`http://localhost:8080/api`, word)
+      .post(`/api`, word)
       .then((response) => {
         props.setEdited(true);
         console.log(response);

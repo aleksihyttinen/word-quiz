@@ -2,6 +2,7 @@ import LanguageSelection from "./LanguageSelection.js";
 import Answer from "./Answer.js";
 import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 export default function StudentView(props) {
   const [words1, setWords1] = useState([]);
@@ -44,8 +45,20 @@ export default function StudentView(props) {
       alert(`You got ${count} right!`);
     }
   };
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate("/");
+  };
   return (
     <div className="student-view">
+      <Button variant="secondary" onClick={goBack}>
+        Back
+      </Button>
+      <h1>
+        Translate words from {displayedLanguages.first} to{" "}
+        {displayedLanguages.second}
+      </h1>
+
       <div className="list-group-holder">
         <div className="words">
           <LanguageSelection

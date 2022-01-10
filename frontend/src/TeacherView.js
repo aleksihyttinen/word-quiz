@@ -12,7 +12,7 @@ export default function TeacherView() {
   const [edited, setEdited] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api`)
+      .get(`/api`)
       .then((response) => {
         setWords(response.data);
         console.log(response.data);

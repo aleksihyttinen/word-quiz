@@ -1,10 +1,12 @@
 import LanguageSelection from "./LanguageSelection.js";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import AddWord from "./AddWord.js";
 import { GrClose } from "react-icons/gr";
 import { IconContext } from "react-icons";
 import EditWord from "./EditWord.js";
+import { useAuth } from "./useAuth";
+import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 export default function TeacherView() {
   const [words, setWords] = useState([]);
@@ -13,7 +15,7 @@ export default function TeacherView() {
   const [edited, setEdited] = useState(false);
   useEffect(() => {
     axios
-      .get(`/api/${displayedLanguage}`)
+      .get(`http://localhost:8080/api/${displayedLanguage}`)
       .then((response) => {
         setWords(response.data);
         setEdited(false);
@@ -39,9 +41,18 @@ export default function TeacherView() {
       return;
     }
   };
+  const { signout } = useAuth();
+  const navigate = useNavigate();
+  const handleSignout = () => {
+    signout();
+    navigate("/");
+  };
 
   return (
     <div className="teacher-view">
+      <Button variant="secondary" onClick={handleSignout}>
+        Signout
+      </Button>
       <div className="list-group-holder">
         <div className="words">
           <LanguageSelection

@@ -8,7 +8,8 @@ import Login from "./Login.js";
 import { ProvideAuth } from "./useAuth";
 import { useAuth } from "./useAuth";
 function RequireAuth({ children }) {
-  const { auth } = useAuth();
+  const { isAuth } = useAuth();
+  let auth = isAuth();
   return auth ? children : <Navigate to="/login" replace />;
 }
 

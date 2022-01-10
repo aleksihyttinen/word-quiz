@@ -3,7 +3,6 @@ const authContext = createContext();
 
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  console.log(auth);
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
@@ -12,17 +11,18 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
-  const [auth, setAuth] = useState(false);
-
   const signin = () => {
-    setAuth(true);
+    localStorage.setItem("isAuth", "authenticated");
   };
   const signout = () => {
-    setAuth(false);
+    localStorage.removeItem("isAuth");
+  };
+  const isAuth = () => {
+    return localStorage.getItem("isAuth");
   };
 
   return {
-    auth,
+    isAuth,
     signin,
     signout,
   };

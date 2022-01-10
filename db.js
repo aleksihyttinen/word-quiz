@@ -22,7 +22,17 @@ let connectionFuncs = {
       resolve("Connection closed");
     });
   },
-  getAll: (language) => {
+  getAll: () => {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT * FROM words`, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  },
+  getByLanguage: (language) => {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT id, ${language} AS word FROM words`, (err, result) => {
         if (err) {

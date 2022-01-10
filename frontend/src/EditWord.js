@@ -30,7 +30,7 @@ export default function EditWord(props) {
   };
   return (
     <>
-      <BsPencil size="20px" onClick={getWords} />
+      <BsPencil onClick={getWords} />
       <Modal show={showModal} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit word</Modal.Title>

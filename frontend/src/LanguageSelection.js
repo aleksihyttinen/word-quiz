@@ -23,7 +23,14 @@ export default function LanguageSelection(props) {
       name="languages"
     >
       {props.languages.map((language) => {
-        return (
+        return (props.whichList === "second" &&
+          language === props.displayedLanguages.first) ||
+          (props.whichList === "first" &&
+            language === props.displayedLanguages.second) ? (
+          <option key={language} disabled value={language}>
+            {language}
+          </option>
+        ) : (
           <option key={language} value={language}>
             {language}
           </option>

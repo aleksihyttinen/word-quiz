@@ -1,10 +1,8 @@
 .list-group-holder {
   display: flex;
+  flex-direction: row;
   margin: 5rem;
-}
-.words {
-  margin-left: auto;
-  margin-right: 1rem;
+  gap: 1rem;
 }
 .input {
   margin-right: auto;
@@ -22,11 +20,19 @@
   justify-content: center;
   flex-direction: column;
 }
+.btn.btn-secondary {
+  margin-left: auto;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
 .btn.btn-primary {
   margin: 20px;
 }
 .list-group-item {
   height: 50px;
+  min-width: 200px;
+  text-align: center;
+  font-size: 20px;
 }
 .app .btn.btn-primary {
   margin-top: 100px;

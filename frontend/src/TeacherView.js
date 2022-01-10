@@ -12,7 +12,7 @@ export default function TeacherView() {
   const [edited, setEdited] = useState(false);
   useEffect(() => {
     axios
-      .get(`/api`)
+      .get(`http://localhost:8080/api`)
       .then((response) => {
         setWords(response.data);
         console.log(response.data);
@@ -53,27 +53,25 @@ export default function TeacherView() {
       </Button>
       <div className="list-group-holder">
         <ListGroup>
-          english
+          <ListGroup.Item>
+            <div>english | finnish | swedish</div>
+          </ListGroup.Item>
           {words.map((word) => (
-            <ListGroup.Item key={word.id}>{word.english}</ListGroup.Item>
-          ))}
-        </ListGroup>
-        <ListGroup>
-          finnish
-          {words.map((word) => (
-            <ListGroup.Item key={word.id}>{word.finnish}</ListGroup.Item>
-          ))}
-        </ListGroup>
-        <ListGroup>
-          swedish
-          {words.map((word) => (
-            <ListGroup.Item key={word.id}>
-              {word.swedish}
-              <IconContext.Provider value={{ className: "react-icons" }}>
-                <GrClose size="20px" onClick={() => removeWord(word.id)} />
-                <EditWord id={word.id} setEdited={setEdited} />
-              </IconContext.Provider>
-            </ListGroup.Item>
+            <>
+              <ListGroup.Item key={word.id}>
+                <div>{word.english + " |"}</div>
+                <div> {word.finnish + " |"}</div>
+                <div>{word.swedish}</div>
+                <IconContext.Provider value={{ className: "react-icons" }}>
+                  <div className="margin-test">
+                    <GrClose onClick={() => removeWord(word.id)} />
+                  </div>
+                  <div>
+                    <EditWord id={word.id} setEdited={setEdited} />
+                  </div>
+                </IconContext.Provider>
+              </ListGroup.Item>
+            </>
           ))}
         </ListGroup>
       </div>

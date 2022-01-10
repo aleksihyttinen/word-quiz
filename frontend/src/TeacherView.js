@@ -1,4 +1,3 @@
-import LanguageSelection from "./LanguageSelection.js";
 import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import AddWord from "./AddWord.js";
@@ -10,20 +9,19 @@ import { useNavigate } from "react-router-dom";
 const axios = require("axios").default;
 export default function TeacherView() {
   const [words, setWords] = useState([]);
-  const languages = ["english", "finnish", "swedish"];
-  const [displayedLanguage, setDisplayedLanguage] = useState("english");
   const [edited, setEdited] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${displayedLanguage}`)
+      .get(`/api`)
       .then((response) => {
         setWords(response.data);
+        console.log(response.data);
         setEdited(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [displayedLanguage, edited]);
+  }, [edited]);
   const removeWord = (id) => {
     if (
       window.confirm(
@@ -54,25 +52,30 @@ export default function TeacherView() {
         Signout
       </Button>
       <div className="list-group-holder">
-        <div className="words">
-          <LanguageSelection
-            setDisplayedLanguage={setDisplayedLanguage}
-            displayedLanguage={displayedLanguage}
-            languages={languages}
-            selected={displayedLanguage}
-          />
-          <ListGroup>
-            {words.map((word) => (
-              <ListGroup.Item key={word.id}>
-                {word.word}
-                <IconContext.Provider value={{ className: "react-icons" }}>
-                  <GrClose size="20px" onClick={() => removeWord(word.id)} />
-                  <EditWord id={word.id} setEdited={setEdited} />
-                </IconContext.Provider>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </div>
+        <ListGroup>
+          english
+          {words.map((word) => (
+            <ListGroup.Item key={word.id}>{word.english}</ListGroup.Item>
+          ))}
+        </ListGroup>
+        <ListGroup>
+          finnish
+          {words.map((word) => (
+            <ListGroup.Item key={word.id}>{word.finnish}</ListGroup.Item>
+          ))}
+        </ListGroup>
+        <ListGroup>
+          swedish
+          {words.map((word) => (
+            <ListGroup.Item key={word.id}>
+              {word.swedish}
+              <IconContext.Provider value={{ className: "react-icons" }}>
+                <GrClose size="20px" onClick={() => removeWord(word.id)} />
+                <EditWord id={word.id} setEdited={setEdited} />
+              </IconContext.Provider>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
       </div>
       <AddWord setEdited={setEdited} />
     </div>

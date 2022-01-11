@@ -15,7 +15,6 @@ export default function TeacherView() {
       .get(`/api`)
       .then((response) => {
         setWords(response.data);
-        console.log(response.data);
         setEdited(false);
       })
       .catch((error) => {
@@ -52,26 +51,75 @@ export default function TeacherView() {
         Signout
       </Button>
       <div className="list-group-holder">
-        <ListGroup>
-          <ListGroup.Item>
-            <div>english | finnish | swedish</div>
+        <ListGroup
+          style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+        >
+          <ListGroup.Item
+            style={{ borderRight: "none", fontWeight: "bold" }}
+            key="English"
+          >
+            English
           </ListGroup.Item>
           {words.map((word) => (
-            <>
-              <ListGroup.Item key={word.id}>
-                <div>{word.english + " |"}</div>
-                <div> {word.finnish + " |"}</div>
-                <div>{word.swedish}</div>
-                <IconContext.Provider value={{ className: "react-icons" }}>
-                  <div className="margin-test">
-                    <GrClose onClick={() => removeWord(word.id)} />
-                  </div>
-                  <div>
-                    <EditWord id={word.id} setEdited={setEdited} />
-                  </div>
-                </IconContext.Provider>
-              </ListGroup.Item>
-            </>
+            <ListGroup.Item style={{ borderRight: "none" }} key={word.id}>
+              {word.english}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+        <ListGroup style={{ borderRadius: 0 }}>
+          <ListGroup.Item
+            style={{
+              borderLeft: "none",
+              borderRight: "none",
+              fontWeight: "bold",
+            }}
+            key="Finnish"
+          >
+            Finnish
+          </ListGroup.Item>
+          {words.map((word) => (
+            <ListGroup.Item
+              style={{ borderLeft: "none", borderRight: "none" }}
+              key={word.id}
+            >
+              {word.finnish}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+        <ListGroup style={{ borderRadius: 0 }}>
+          <ListGroup.Item
+            style={{
+              borderLeft: "none",
+              borderRight: "none",
+              fontWeight: "bold",
+            }}
+            key="Swedish"
+          >
+            Swedish
+          </ListGroup.Item>
+          {words.map((word) => (
+            <ListGroup.Item
+              style={{ borderLeft: "none", borderRight: "none" }}
+              key={word.id}
+            >
+              {word.swedish}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+        <ListGroup
+          style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+        >
+          <ListGroup.Item
+            style={{ minWidth: 50, borderLeft: "none" }}
+            key="Settings"
+          ></ListGroup.Item>
+          {words.map((word) => (
+            <ListGroup.Item style={{ minWidth: 50 }} key={word.id}>
+              <IconContext.Provider value={{ className: "react-icons" }}>
+                <EditWord word={word} setEdited={setEdited} />
+                <GrClose onClick={() => removeWord(word.id)} />
+              </IconContext.Provider>
+            </ListGroup.Item>
           ))}
         </ListGroup>
       </div>

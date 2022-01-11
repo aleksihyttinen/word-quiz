@@ -29,7 +29,7 @@ app.get("/api/:language", async (req, res) => {
     res.end();
   }
 });
-app.get("/api/:id", async (req, res) => {
+app.get("/api/id/:id", async (req, res) => {
   let id = req.params.id;
   try {
     let data = await connection.getById(id);

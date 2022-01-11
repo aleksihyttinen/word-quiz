@@ -4,11 +4,14 @@ import { BsPencil } from "react-icons/bs";
 const axios = require("axios").default;
 export default function EditWord(props) {
   const [showModal, setShow] = useState(false);
-  const [word, setWord] = useState(undefined);
-  let newWord = [];
+  const [word, setWord] = useState([
+    props.word.english,
+    props.word.finnish,
+    props.word.swedish,
+  ]);
   const editWord = () => {
     axios
-      .put(`/api/${props.id}`, newWord)
+      .put(`/api/${props.word.id}`, word)
       .then((response) => {
         props.setEdited(true);
         console.log(response);
@@ -16,22 +19,16 @@ export default function EditWord(props) {
       .catch((err) => console.log(err));
     setShow(false);
   };
-  const getWords = () => {
-    axios
-      .get(`/api/${props.id}`)
-      .then((response) => {
-        setWord(response.data);
-        console.log(word);
-        setShow(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   return (
     <>
-      <BsPencil onClick={getWords} />
-      <Modal show={showModal} onHide={() => setShow(false)}>
+      <BsPencil onClick={() => setShow(true)} />
+      <Modal
+        show={showModal}
+        onHide={() => {
+          setShow(false);
+          setWord([props.word.english, props.word.finnish, props.word.swedish]);
+        }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit word</Modal.Title>
         </Modal.Header>
@@ -41,21 +38,30 @@ export default function EditWord(props) {
             <div style={{ fontWeight: "bold" }}>
               <Form.Label>English:</Form.Label>
               <Form.Control
-                onChange={(e) => (newWord[0] = e.target.value)}
                 style={{ marginBottom: 10 }}
-                placeholder={word === undefined ? "English" : word[0].english}
+                placeholder={props.word.english}
+                value={word[0]}
+                onChange={(e) =>
+                  setWord([(word[0] = e.target.value), word[1], word[2]])
+                }
               />
               <Form.Label>Finnish:</Form.Label>
               <Form.Control
-                onChange={(e) => (newWord[1] = e.target.value)}
                 style={{ marginBottom: 10 }}
-                placeholder={word === undefined ? "English" : word[0].finnish}
+                placeholder={props.word.finnish}
+                value={word[1]}
+                onChange={(e) =>
+                  setWord([word[0], (word[1] = e.target.value), word[2]])
+                }
               />
               <Form.Label>Swedish:</Form.Label>
               <Form.Control
-                onChange={(e) => (newWord[2] = e.target.value)}
                 style={{ marginBottom: 10 }}
-                placeholder={word === undefined ? "English" : word[0].swedish}
+                placeholder={props.word.swedish}
+                value={word[2]}
+                onChange={(e) =>
+                  setWord([word[0], word[1], (word[2] = e.target.value)])
+                }
               />
             </div>
           </Form.Group>

@@ -1,0 +1,28 @@
+.input-container {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+.student-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.list-group-holder {
+  max-width: 100vw;
+}
+.btn.btn-secondary {
+  margin-left: auto;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+.btn.btn-primary {
+  margin: 20px;
+}
+.list-group-item {
+  height: 50px;
+}
+input {
+  width: 100%;
+  height: 100%;
+}

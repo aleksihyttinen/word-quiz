@@ -6,6 +6,7 @@ import { IconContext } from "react-icons";
 import EditWord from "./EditWord.js";
 import { useAuth } from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import "./TeacherView.css";
 const axios = require("axios").default;
 export default function TeacherView() {
   const [words, setWords] = useState([]);
@@ -51,61 +52,63 @@ export default function TeacherView() {
         Signout
       </Button>
       <div className="list-group-holder">
-        <ListGroup
-          style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
-        >
-          <ListGroup.Item
-            style={{ borderRight: "none", fontWeight: "bold" }}
-            key="English"
+        <div className="scrollable">
+          <ListGroup
+            style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
           >
-            English
-          </ListGroup.Item>
-          {words.map((word) => (
-            <ListGroup.Item style={{ borderRight: "none" }} key={word.id}>
-              {word.english}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-        <ListGroup style={{ borderRadius: 0 }}>
-          <ListGroup.Item
-            style={{
-              borderLeft: "none",
-              borderRight: "none",
-              fontWeight: "bold",
-            }}
-            key="Finnish"
-          >
-            Finnish
-          </ListGroup.Item>
-          {words.map((word) => (
             <ListGroup.Item
-              style={{ borderLeft: "none", borderRight: "none" }}
-              key={word.id}
+              style={{ borderRight: "none", fontWeight: "bold" }}
+              key="English"
             >
-              {word.finnish}
+              English
             </ListGroup.Item>
-          ))}
-        </ListGroup>
-        <ListGroup style={{ borderRadius: 0 }}>
-          <ListGroup.Item
-            style={{
-              borderLeft: "none",
-              borderRight: "none",
-              fontWeight: "bold",
-            }}
-            key="Swedish"
-          >
-            Swedish
-          </ListGroup.Item>
-          {words.map((word) => (
+            {words.map((word) => (
+              <ListGroup.Item style={{ borderRight: "none" }} key={word.id}>
+                {word.english}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+          <ListGroup style={{ borderRadius: 0 }}>
             <ListGroup.Item
-              style={{ borderLeft: "none", borderRight: "none" }}
-              key={word.id}
+              style={{
+                borderLeft: "none",
+                borderRight: "none",
+                fontWeight: "bold",
+              }}
+              key="Finnish"
             >
-              {word.swedish}
+              Finnish
             </ListGroup.Item>
-          ))}
-        </ListGroup>
+            {words.map((word) => (
+              <ListGroup.Item
+                style={{ borderLeft: "none", borderRight: "none" }}
+                key={word.id}
+              >
+                {word.finnish}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+          <ListGroup style={{ borderRadius: 0 }}>
+            <ListGroup.Item
+              style={{
+                borderLeft: "none",
+                borderRight: "none",
+                fontWeight: "bold",
+              }}
+              key="Swedish"
+            >
+              Swedish
+            </ListGroup.Item>
+            {words.map((word) => (
+              <ListGroup.Item
+                style={{ borderLeft: "none", borderRight: "none" }}
+                key={word.id}
+              >
+                {word.swedish}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
         <ListGroup
           style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
         >

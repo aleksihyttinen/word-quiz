@@ -3,6 +3,7 @@ import Answer from "./Answer.js";
 import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./StudentView.css";
 const axios = require("axios").default;
 export default function StudentView(props) {
   const [words1, setWords1] = useState([]);
@@ -60,7 +61,7 @@ export default function StudentView(props) {
       </h1>
 
       <div className="list-group-holder">
-        <div className="words">
+        <div className="word-container">
           <LanguageSelection
             setDisplayedLanguages={setDisplayedLanguages}
             displayedLanguages={displayedLanguages}
@@ -74,7 +75,7 @@ export default function StudentView(props) {
             ))}
           </ListGroup>
         </div>
-        <div className="input">
+        <div className="input-container">
           <LanguageSelection
             setDisplayedLanguages={setDisplayedLanguages}
             displayedLanguages={displayedLanguages}

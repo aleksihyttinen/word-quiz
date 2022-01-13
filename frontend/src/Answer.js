@@ -9,6 +9,8 @@ export default function Answer(props) {
       autoComplete="off"
       id={props.index}
       name={props.word}
+      style={{ color: props.color }}
+      value={props.userWords[props.index]}
     />
   );
 }

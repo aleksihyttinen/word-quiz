@@ -103,6 +103,15 @@ h3 {
     margin-right: 1rem;
     font-size: x-large;
   }
+  .category-view .btn.btn-secondary {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    font-size: x-large;
+  }
   .student-view .btn.btn-primary {
     font-size: x-large;
   }

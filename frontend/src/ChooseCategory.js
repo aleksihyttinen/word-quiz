@@ -7,7 +7,7 @@ export default function ChooseCategory() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/`)
+      .get(`/api/`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -18,7 +18,12 @@ export default function ChooseCategory() {
   return (
     <div className="choose-category">
       {categories.map((category) => (
-        <Button>{category.table_name}</Button>
+        <Button
+          key={category.table_name}
+          onClick={() => navigate(`/student/?category=${category.table_name}`)}
+        >
+          {category.table_name}
+        </Button>
       ))}
     </div>
   );

@@ -2,7 +2,7 @@ import LanguageSelection from "./LanguageSelection.js";
 import Answer from "./Answer.js";
 import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "./StudentView.css";
 import ChooseCategory from "./ChooseCategory.js";
 const axios = require("axios").default;

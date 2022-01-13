@@ -19,7 +19,7 @@ export default function StudentView() {
   var userWords = [];
   useEffect(() => {
     axios
-      .get(`/api/${displayedLanguages.first}`)
+      .get(`http://localhost:8080/api/${displayedLanguages.first}`)
       .then((response) => {
         setWords1(response.data);
       })
@@ -29,7 +29,7 @@ export default function StudentView() {
   }, [displayedLanguages.first]);
   useEffect(() => {
     axios
-      .get(`/api/${displayedLanguages.second}`)
+      .get(`http://localhost:8080/api/${displayedLanguages.second}`)
       .then((response) => setWords2(response.data))
       .catch((error) => console.log(error));
   }, [displayedLanguages.second]);
@@ -49,10 +49,11 @@ export default function StudentView() {
       let temp = [];
       for (let i = 0; i < words2.length; i++) {
         if (userWords[i] !== undefined) {
-          let noWhiteSpace = userWords[i].replace(/\s/g, "");
-          if (words2[i].word.toLowerCase() === noWhiteSpace.toLowerCase()) {
+          let trimmedWord = userWords[i].replace(/\s/g, "").toLowerCase();
+          console.log(trimmedWord);
+          if (words2[i].word.toLowerCase() === trimmedWord) {
             count++;
-            temp.push(noWhiteSpace);
+            temp.push(trimmedWord);
           }
         }
       }
@@ -104,7 +105,7 @@ export default function StudentView() {
               <ListGroup.Item key={word.id}>
                 <Answer
                   color={
-                    hasAnswered && correct.includes(word.word)
+                    hasAnswered && correct.includes(word.word.toLowerCase())
                       ? "green"
                       : hasAnswered && !correct.includes(word.word)
                       ? "red"
@@ -113,6 +114,7 @@ export default function StudentView() {
                   userWords={userWords}
                   index={index}
                   word={word}
+                  hasAnswered={hasAnswered}
                 />
               </ListGroup.Item>
             ))}

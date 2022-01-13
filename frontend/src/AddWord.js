@@ -10,7 +10,7 @@ export default function AddWord(props) {
       return;
     }
     axios
-      .post(`/api`, word)
+      .post(`/api/${props.category}`, word)
       .then((response) => {
         props.setEdited(true);
         console.log(response);

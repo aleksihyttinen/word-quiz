@@ -69,9 +69,8 @@ export default function StudentView() {
       setCorrectCount(count);
     }
   };
-  const navigate = useNavigate();
   const goBack = () => {
-    navigate("/");
+    setSearchParams();
   };
   if (category === null) {
     return <ChooseCategory></ChooseCategory>;

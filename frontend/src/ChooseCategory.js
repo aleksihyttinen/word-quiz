@@ -15,7 +15,7 @@ export default function ChooseCategory() {
         console.log(error);
       });
   }, []);
-  return (
+  return categories.length !== 0 ? (
     <div className="choose-category">
       {categories.map((category) => (
         <Button
@@ -26,5 +26,7 @@ export default function ChooseCategory() {
         </Button>
       ))}
     </div>
+  ) : (
+    <div />
   );
 }

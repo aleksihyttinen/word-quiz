@@ -89,6 +89,7 @@ app.delete("/api/:category/:id", async (req, res) => {
   }
 });
 app.put("/api/:category/:id", async (req, res) => {
+  let category = req.params.category;
   let id = req.params.id;
   let word = req.body;
   try {

@@ -26,3 +26,8 @@ h1 {
   text-align: center;
   margin-top: 2rem;
 }
+@media only screen and (min-width: 700px) {
+  .app .btn.btn-primary {
+    margin: 4rem 1rem 1rem 1rem;
+  }
+}

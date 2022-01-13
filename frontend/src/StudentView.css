@@ -56,6 +56,33 @@ input {
 h3 {
   margin: 1rem;
 }
+.category-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.choose-category {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+}
+.choose-category .btn.btn-primary {
+  font-size: x-large;
+}
+.category-view .btn.btn-secondary {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10rem;
+  margin-bottom: 1rem;
+}
+.category-view h1 {
+  margin-top: 5rem;
+}
 @media only screen and (min-width: 700px) {
   .student-view > .list-group-container {
     max-width: 960px;
@@ -79,9 +106,14 @@ h3 {
   .student-view .btn.btn-primary {
     font-size: x-large;
   }
-}
-@media only screen and (min-width: 600px) {
-  .app .btn.btn-primary {
-    margin: 4rem 1rem 1rem 1rem;
+  .choose-category {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+  }
+  .choose-category .btn.btn-primary {
+    font-size: x-large;
   }
 }

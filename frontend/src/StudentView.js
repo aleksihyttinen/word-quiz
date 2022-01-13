@@ -2,7 +2,7 @@ import LanguageSelection from "./LanguageSelection.js";
 import Answer from "./Answer.js";
 import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import "./StudentView.css";
 import ChooseCategory from "./ChooseCategory.js";
 const axios = require("axios").default;
@@ -19,7 +19,7 @@ export default function StudentView() {
   const [correct, setCorrect] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   let category = searchParams.get("category");
-  console.log(searchParams.get("category"));
+  const navigate = useNavigate();
   var userWords = [];
   useEffect(() => {
     if (category !== null) {
@@ -69,11 +69,16 @@ export default function StudentView() {
       setCorrectCount(count);
     }
   };
-  const goBack = () => {
-    setSearchParams();
-  };
   if (category === null) {
-    return <ChooseCategory></ChooseCategory>;
+    return (
+      <div className="category-view">
+        <h1>Choose category:</h1>
+        <ChooseCategory></ChooseCategory>
+        <Button variant="secondary" onClick={() => navigate("/")}>
+          Main Page
+        </Button>
+      </div>
+    );
   } else {
     return words1.length !== 0 && words2.length !== 0 ? (
       <div className="student-view">
@@ -134,7 +139,7 @@ export default function StudentView() {
         <Button onClick={handleClick}>
           {hasAnswered ? "Play again" : "Check answers"}
         </Button>
-        <Button variant="secondary" onClick={goBack}>
+        <Button variant="secondary" onClick={() => setSearchParams()}>
           Back
         </Button>
       </div>

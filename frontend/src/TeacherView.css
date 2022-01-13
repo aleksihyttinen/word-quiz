@@ -64,6 +64,9 @@
 .settings-icons .list-group-item {
   padding: 0.2rem;
 }
+.teacher-view .info {
+  width: 95%;
+}
 @media only screen and (min-width: 700px) {
   .mobile-info {
     display: none;
@@ -93,5 +96,8 @@
   }
   .teacher-view .btn.btn-primary {
     font-size: x-large;
+  }
+  .teacher-view .info {
+    width: auto;
   }
 }

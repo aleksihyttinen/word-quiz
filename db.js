@@ -22,9 +22,9 @@ let connectionFuncs = {
       resolve("Connection closed");
     });
   },
-  getAll: () => {
+  getAll: (category) => {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM words`, (err, result) => {
+      pool.query(`SELECT * FROM ${category}`, (err, result) => {
         if (err) {
           reject(err);
         }
@@ -32,20 +32,23 @@ let connectionFuncs = {
       });
     });
   },
-  getByLanguage: (language) => {
-    return new Promise((resolve, reject) => {
-      pool.query(`SELECT id, ${language} AS word FROM words`, (err, result) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(result);
-      });
-    });
-  },
-  postWord: (word) => {
+  getByLanguage: (language, category) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        `INSERT INTO words (english, finnish, swedish) VALUES (?,?,?)`,
+        `SELECT id, ${language} AS word FROM ${category}`,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(result);
+        }
+      );
+    });
+  },
+  postWord: (word, category) => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `INSERT INTO ${category} (english, finnish, swedish) VALUES (?,?,?)`,
         word,
         (err, result) => {
           if (err) {
@@ -56,24 +59,28 @@ let connectionFuncs = {
       );
     });
   },
-  deleteWord: (id) => {
-    return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM words WHERE words.id = ?`, id, (err, result) => {
-        if (err) {
-          reject(err);
-        }
-        if (result.affectedRows == 0) {
-          reject("Id not found");
-        } else {
-          resolve(`Deleted id: ${id} successfully`);
-        }
-      });
-    });
-  },
-  getById: (id) => {
+  deleteWord: (id, category) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        `SELECT * FROM words WHERE words.id = ?`,
+        `DELETE FROM ${category} WHERE words.id = ?`,
+        id,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          }
+          if (result.affectedRows == 0) {
+            reject("Id not found");
+          } else {
+            resolve(`Deleted id: ${id} successfully`);
+          }
+        }
+      );
+    });
+  },
+  getById: (id, category) => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT * FROM ${category} WHERE words.id = ?`,
         id,
         (err, result) => {
           if (err) {
@@ -88,10 +95,10 @@ let connectionFuncs = {
       );
     });
   },
-  editWord: (id, word) => {
+  editWord: (id, word, category) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        `UPDATE words SET english = ?, finnish = ?, swedish = ? WHERE words.id = ${id}`,
+        `UPDATE ${category} SET english = ?, finnish = ?, swedish = ? WHERE words.id = ${id}`,
         word,
         (err, result) => {
           if (err) {

@@ -8,9 +8,10 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static("frontend/build"));
 
-app.get("/api", async (req, res) => {
+app.get("/api/:category", async (req, res) => {
+  let category = req.params.category;
   try {
-    let data = await connection.getAll();
+    let data = await connection.getAll(category);
     res.send(data);
   } catch (err) {
     console.log(err);
@@ -18,10 +19,12 @@ app.get("/api", async (req, res) => {
     res.end();
   }
 });
-app.get("/api/:language", async (req, res) => {
+app.get("/api/:category/:language", async (req, res) => {
+  console.log(req.params);
+  let category = req.params.category;
   let language = req.params.language;
   try {
-    let data = await connection.getByLanguage(language);
+    let data = await connection.getByLanguage(language, category);
     res.send(data);
   } catch (err) {
     console.log(err);
@@ -29,10 +32,11 @@ app.get("/api/:language", async (req, res) => {
     res.end();
   }
 });
-app.get("/api/id/:id", async (req, res) => {
+app.get("/api/:category/id/:id", async (req, res) => {
+  let category = req.params.category;
   let id = req.params.id;
   try {
-    let data = await connection.getById(id);
+    let data = await connection.getById(id, category);
     res.send(data);
   } catch (err) {
     console.log(err);
@@ -40,10 +44,11 @@ app.get("/api/id/:id", async (req, res) => {
     res.end();
   }
 });
-app.post("/api", async (req, res) => {
+app.post("/api/:category", async (req, res) => {
+  let category = req.params.category;
   let word = req.body;
   try {
-    let insertId = await connection.postWord(word);
+    let insertId = await connection.postWord(word, category);
     res.statusCode = 201;
     res.send({
       id: insertId,
@@ -57,10 +62,11 @@ app.post("/api", async (req, res) => {
     res.end();
   }
 });
-app.delete("/api/:id", async (req, res) => {
+app.delete("/api/:category/:id", async (req, res) => {
+  let category = req.params.category;
   let id = req.params.id;
   try {
-    let result = await connection.deleteWord(id);
+    let result = await connection.deleteWord(id, category);
     res.statusCode = 200;
     res.send(result);
     res.end();
@@ -72,11 +78,11 @@ app.delete("/api/:id", async (req, res) => {
     }
   }
 });
-app.put("/api/:id", async (req, res) => {
+app.put("/api/:category/:id", async (req, res) => {
   let id = req.params.id;
   let word = req.body;
   try {
-    await connection.editWord(id, word);
+    await connection.editWord(id, word, category);
     res.statusCode = 200;
     res.send({
       id: id,

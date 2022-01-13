@@ -49,9 +49,10 @@ export default function StudentView() {
       let temp = [];
       for (let i = 0; i < words2.length; i++) {
         if (userWords[i] !== undefined) {
-          if (words2[i].word.toLowerCase() === userWords[i].toLowerCase()) {
+          let noWhiteSpace = userWords[i].replace(/\s/g, "");
+          if (words2[i].word.toLowerCase() === noWhiteSpace.toLowerCase()) {
             count++;
-            temp.push(userWords[i]);
+            temp.push(noWhiteSpace);
           }
         }
       }

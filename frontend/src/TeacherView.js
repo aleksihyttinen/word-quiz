@@ -13,18 +13,26 @@ export default function TeacherView() {
   const [words, setWords] = useState([]);
   const [edited, setEdited] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  let category = searchParams.get("category");
+  const [category, setCategory] = useState("animals");
   useEffect(() => {
-    axios
-      .get(`/api/${category}`)
-      .then((response) => {
-        setWords(response.data);
-        setEdited(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (category !== null) {
+      axios
+        .get(`/api/${category}`)
+        .then((response) => {
+          setWords(response.data);
+          setEdited(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [edited, category]);
+  useEffect(() => {
+    if (searchParams.get("category") === null) {
+      setSearchParams({ category: "animals" });
+    }
+    setCategory(searchParams.get("category"));
+  }, [searchParams, setSearchParams]);
   const removeWord = (id) => {
     if (
       window.confirm(
@@ -32,7 +40,7 @@ export default function TeacherView() {
       )
     ) {
       axios
-        .delete(`/api/${id}`)
+        .delete(`/api/${category}/${id}`)
         .then((response) => {
           console.log(response);
           setEdited(true);
@@ -52,7 +60,7 @@ export default function TeacherView() {
   return words.length !== 0 ? (
     <div className="teacher-view">
       <h1>Here you can add, edit, or delete words.</h1>
-      <AddWord setEdited={setEdited} />
+      <AddWord category={category} setEdited={setEdited} />
       <div className="info">
         <span>Select category: </span>
         <select
@@ -135,7 +143,11 @@ export default function TeacherView() {
             {words.map((word) => (
               <ListGroup.Item style={{ minWidth: 50 }} key={word.id}>
                 <IconContext.Provider value={{ className: "react-icons" }}>
-                  <EditWord word={word} setEdited={setEdited} />
+                  <EditWord
+                    category={category}
+                    word={word}
+                    setEdited={setEdited}
+                  />
                   <GrClose onClick={() => removeWord(word.id)} />
                 </IconContext.Provider>
               </ListGroup.Item>

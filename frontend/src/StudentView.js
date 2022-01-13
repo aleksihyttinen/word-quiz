@@ -69,14 +69,8 @@ export default function StudentView() {
   return words1.length !== 0 && words2.length !== 0 ? (
     <div className="student-view">
       <h1>
-        {hasAnswered
-          ? `You got ${correctCount} right!`
-          : `Translate words from ${displayedLanguages.first} to ${displayedLanguages.second}`}
+        {`Translate words from ${displayedLanguages.first} to ${displayedLanguages.second}`}
       </h1>
-      <Button onClick={handleClick}>
-        {hasAnswered ? "Play again" : "Check answers"}
-      </Button>
-
       <div className="list-group-container">
         <div className="word-container">
           <LanguageSelection
@@ -121,6 +115,16 @@ export default function StudentView() {
           </ListGroup>
         </div>
       </div>
+      <h3
+        style={
+          hasAnswered ? { visibility: "visible" } : { visibility: "hidden" }
+        }
+      >
+        You got {correctCount} right!
+      </h3>
+      <Button onClick={handleClick}>
+        {hasAnswered ? "Play again" : "Check answers"}
+      </Button>
       <Button variant="secondary" onClick={goBack}>
         Back
       </Button>

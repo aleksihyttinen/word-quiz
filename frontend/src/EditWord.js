@@ -1,5 +1,5 @@
 import { Modal, Button, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
 const axios = require("axios").default;
 export default function EditWord(props) {
@@ -9,9 +9,12 @@ export default function EditWord(props) {
     props.word.finnish,
     props.word.swedish,
   ]);
+  useEffect(() => {
+    setWord([props.word.english, props.word.finnish, props.word.swedish]);
+  }, [props.category, props.word]);
   const editWord = () => {
     axios
-      .put(`/api/${props.word.id}`, word)
+      .put(`/api/${props.category}/${props.word.id}`, word)
       .then((response) => {
         props.setEdited(true);
         console.log(response);

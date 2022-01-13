@@ -18,7 +18,10 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}></Route>
-        <Route path="/student" element={<StudentView />}></Route>
+        <Route
+          path="/student?category=animals"
+          element={<StudentView />}
+        ></Route>
         <Route
           path="/teacher"
           element={

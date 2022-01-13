@@ -1,10 +1,10 @@
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 const axios = require("axios").default;
 export default function ChooseCategory() {
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     axios
       .get(`/api/`)
@@ -20,7 +20,7 @@ export default function ChooseCategory() {
       {categories.map((category) => (
         <Button
           key={category.table_name}
-          onClick={() => navigate(`/student/?category=${category.table_name}`)}
+          onClick={() => setSearchParams({ category: category.table_name })}
         >
           {category.table_name}
         </Button>

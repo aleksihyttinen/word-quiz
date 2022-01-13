@@ -10,7 +10,8 @@ export default function Login() {
   const password = "password";
   const [input, setInput] = useState("");
   const { signin } = useAuth();
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     if (input !== password) {
       alert("Wrong password");
     } else {

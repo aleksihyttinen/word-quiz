@@ -19,7 +19,7 @@ export default function StudentView() {
   var userWords = [];
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${displayedLanguages.first}`)
+      .get(`/api/${displayedLanguages.first}`)
       .then((response) => {
         setWords1(response.data);
       })
@@ -29,7 +29,7 @@ export default function StudentView() {
   }, [displayedLanguages.first]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${displayedLanguages.second}`)
+      .get(`/api/${displayedLanguages.second}`)
       .then((response) => setWords2(response.data))
       .catch((error) => console.log(error));
   }, [displayedLanguages.second]);

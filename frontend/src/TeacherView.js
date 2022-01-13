@@ -5,15 +5,18 @@ import { GrClose } from "react-icons/gr";
 import { IconContext } from "react-icons";
 import EditWord from "./EditWord.js";
 import { useAuth } from "./useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./TeacherView.css";
+import ChooseCategory from "./ChooseCategory.js";
 const axios = require("axios").default;
 export default function TeacherView() {
   const [words, setWords] = useState([]);
   const [edited, setEdited] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  let category = searchParams.get("category");
   useEffect(() => {
     axios
-      .get(`/api`)
+      .get(`http://localhost:8080/api/${category}`)
       .then((response) => {
         setWords(response.data);
         setEdited(false);
@@ -21,7 +24,7 @@ export default function TeacherView() {
       .catch((error) => {
         console.log(error);
       });
-  }, [edited]);
+  }, [edited, category]);
   const removeWord = (id) => {
     if (
       window.confirm(
@@ -50,9 +53,19 @@ export default function TeacherView() {
     <div className="teacher-view">
       <h1>Here you can add, edit, or delete words.</h1>
       <AddWord setEdited={setEdited} />
-      <p className="mobile-info">
-        {"On mobile you can scroll the list <-> to see more"}
-      </p>
+      <div className="info">
+        <span>Select category: </span>
+        <select
+          defaultValue={category}
+          onChange={(e) => setSearchParams({ category: e.target.value })}
+          name="languages"
+        >
+          <ChooseCategory view="teacher" />
+        </select>
+        <p className="mobile-info">
+          {"On mobile you can scroll the list <-> to see more"}
+        </p>
+      </div>
       <div className="list-group-container">
         <div className="scrollable">
           <ListGroup

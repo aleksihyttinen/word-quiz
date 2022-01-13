@@ -64,7 +64,7 @@ export default function StudentView() {
     navigate("/");
   };
 
-  return (
+  return words1.length !== 0 && words2.length !== 0 ? (
     <div className="student-view">
       <h1>
         {hasAnswered
@@ -122,5 +122,7 @@ export default function StudentView() {
         Back
       </Button>
     </div>
+  ) : (
+    <div />
   );
 }

@@ -46,7 +46,7 @@ export default function TeacherView() {
     navigate("/");
   };
 
-  return (
+  return words.length !== 0 ? (
     <div className="teacher-view">
       <h1>Here you can add, edit, or delete words.</h1>
       <AddWord setEdited={setEdited} />
@@ -134,5 +134,7 @@ export default function TeacherView() {
         Signout
       </Button>
     </div>
+  ) : (
+    <div />
   );
 }

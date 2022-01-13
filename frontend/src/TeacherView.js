@@ -16,7 +16,7 @@ export default function TeacherView() {
   let category = searchParams.get("category");
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${category}`)
+      .get(`/api/${category}`)
       .then((response) => {
         setWords(response.data);
         setEdited(false);

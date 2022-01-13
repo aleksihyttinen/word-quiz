@@ -7,7 +7,7 @@ export default function ChooseCategory(props) {
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/`)
+      .get(`/api/`)
       .then((response) => {
         setCategories(response.data);
       })

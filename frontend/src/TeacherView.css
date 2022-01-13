@@ -1,9 +1,8 @@
 .react-icons {
   vertical-align: middle;
-  margin-top: 5px;
+  margin: 5px;
   cursor: pointer;
 }
-
 .form-label {
   margin-left: 1rem;
 }
@@ -20,13 +19,13 @@
 .modal-footer {
   margin-top: 1rem;
 }
-.list-group-container {
+.teacher-view .list-group-container {
   display: flex;
   flex-direction: row;
   width: 95%;
+  margin-bottom: 1rem;
 }
 .mobile-info {
-  margin-top: 1rem;
   margin-bottom: 0;
   opacity: 0.75;
 }
@@ -42,21 +41,21 @@
   flex-direction: column;
   width: 100vw;
 }
-.icons {
-  width: 50px;
+.settings-icons .list-group-item {
+  width: 70px;
 }
-.btn.btn-secondary {
+.teacher-view .btn.btn-secondary {
   margin-bottom: 1rem;
   font-size: large;
 }
-.btn.btn-primary {
+.teacher-view .btn.btn-primary {
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: large;
 }
 .teacher-view .list-group-item {
   height: 50px;
-  min-width: 100px;
+  min-width: 150px;
   font-size: 20px;
   max-width: 260px;
   overflow-wrap: break-word;
@@ -64,4 +63,35 @@
 }
 .settings-icons .list-group-item {
   padding: 0.2rem;
+}
+@media only screen and (min-width: 700px) {
+  .mobile-info {
+    display: none;
+  }
+  .teacher-view > .list-group-container {
+    max-width: 960px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .react-icons {
+    margin: 5px;
+  }
+  .word-container {
+    width: auto;
+  }
+  .teacher-view .btn.btn-secondary {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    font-size: x-large;
+  }
+  .teacher-view .btn.btn-primary {
+    font-size: x-large;
+  }
 }

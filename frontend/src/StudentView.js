@@ -71,6 +71,9 @@ export default function StudentView() {
           ? `You got ${correctCount} right!`
           : `Translate words from ${displayedLanguages.first} to ${displayedLanguages.second}`}
       </h1>
+      <Button onClick={handleClick}>
+        {hasAnswered ? "Play again" : "Check answers"}
+      </Button>
 
       <div className="list-group-container">
         <div className="word-container">
@@ -115,9 +118,6 @@ export default function StudentView() {
           </ListGroup>
         </div>
       </div>
-      <Button onClick={handleClick}>
-        {hasAnswered ? "Play again" : "Check answers"}
-      </Button>
       <Button variant="secondary" onClick={goBack}>
         Back
       </Button>

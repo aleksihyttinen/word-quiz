@@ -49,6 +49,7 @@ export default function TeacherView() {
   return (
     <div className="teacher-view">
       <h1>Here you can add, edit, or delete words.</h1>
+      <AddWord setEdited={setEdited} />
       <p className="mobile-info">
         {"On mobile you can scroll the list <-> to see more"}
       </p>
@@ -129,7 +130,6 @@ export default function TeacherView() {
           </ListGroup>
         </div>
       </div>
-      <AddWord setEdited={setEdited} />
       <Button variant="secondary" onClick={handleSignout}>
         Signout
       </Button>

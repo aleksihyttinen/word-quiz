@@ -25,6 +25,7 @@
   line-height: 100%;
   padding-top: 0.75rem;
   overflow-y: auto !important;
+  max-width: 260px;
 }
 input {
   width: 100%;
@@ -43,4 +44,43 @@ input {
   width: 60%;
   overflow-wrap: break-word;
   margin-left: auto;
+}
+.student-view .btn.btn-secondary {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: large;
+}
+.student-view .btn.btn-primary {
+  margin-bottom: 1rem;
+  font-size: large;
+}
+@media only screen and (min-width: 700px) {
+  .student-view > .list-group-container {
+    max-width: 960px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .word-container {
+    width: auto;
+  }
+  .student-view .btn.btn-secondary {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    font-size: x-large;
+  }
+  .student-view .btn.btn-primary {
+    font-size: x-large;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .app .btn.btn-primary {
+    margin: 4rem 1rem 1rem 1rem;
+  }
 }

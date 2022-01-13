@@ -66,16 +66,13 @@ export default function StudentView() {
 
   return (
     <div className="student-view">
-      <Button variant="secondary" onClick={goBack}>
-        Back
-      </Button>
       <h1>
         {hasAnswered
           ? `You got ${correctCount} right!`
           : `Translate words from ${displayedLanguages.first} to ${displayedLanguages.second}`}
       </h1>
 
-      <div className="list-group-holder-student">
+      <div className="list-group-container">
         <div className="word-container">
           <LanguageSelection
             setDisplayedLanguages={setDisplayedLanguages}
@@ -120,6 +117,9 @@ export default function StudentView() {
       </div>
       <Button onClick={handleClick}>
         {hasAnswered ? "Play again" : "Check answers"}
+      </Button>
+      <Button variant="secondary" onClick={goBack}>
+        Back
       </Button>
     </div>
   );

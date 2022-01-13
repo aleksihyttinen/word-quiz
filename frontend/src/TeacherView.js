@@ -13,7 +13,7 @@ export default function TeacherView() {
   const [edited, setEdited] = useState(false);
   useEffect(() => {
     axios
-      .get(`/api`)
+      .get(`http://localhost:8080/api`)
       .then((response) => {
         setWords(response.data);
         setEdited(false);
@@ -48,10 +48,11 @@ export default function TeacherView() {
 
   return (
     <div className="teacher-view">
-      <Button variant="secondary" onClick={handleSignout}>
-        Signout
-      </Button>
-      <div className="list-group-holder">
+      <h1>Here you can add, edit, or delete words.</h1>
+      <p className="mobile-info">
+        {"On mobile you can scroll the list <-> to see more"}
+      </p>
+      <div className="list-group-container">
         <div className="scrollable">
           <ListGroup
             style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
@@ -109,24 +110,29 @@ export default function TeacherView() {
             ))}
           </ListGroup>
         </div>
-        <ListGroup
-          style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-        >
-          <ListGroup.Item
-            style={{ minWidth: 50, borderLeft: "none" }}
-            key="Settings"
-          ></ListGroup.Item>
-          {words.map((word) => (
-            <ListGroup.Item style={{ minWidth: 50 }} key={word.id}>
-              <IconContext.Provider value={{ className: "react-icons" }}>
-                <EditWord word={word} setEdited={setEdited} />
-                <GrClose onClick={() => removeWord(word.id)} />
-              </IconContext.Provider>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <div className="settings-icons">
+          <ListGroup
+            style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+          >
+            <ListGroup.Item
+              style={{ minWidth: 50, borderLeft: "none" }}
+              key="Settings"
+            ></ListGroup.Item>
+            {words.map((word) => (
+              <ListGroup.Item style={{ minWidth: 50 }} key={word.id}>
+                <IconContext.Provider value={{ className: "react-icons" }}>
+                  <EditWord word={word} setEdited={setEdited} />
+                  <GrClose onClick={() => removeWord(word.id)} />
+                </IconContext.Provider>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
       </div>
       <AddWord setEdited={setEdited} />
+      <Button variant="secondary" onClick={handleSignout}>
+        Signout
+      </Button>
     </div>
   );
 }

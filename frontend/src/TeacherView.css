@@ -20,40 +20,48 @@
 .modal-footer {
   margin-top: 1rem;
 }
-.list-group-holder {
+.list-group-container {
   display: flex;
   flex-direction: row;
-  margin-top: 5rem;
+  width: 95%;
+}
+.mobile-info {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  opacity: 0.75;
 }
 .scrollable {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  max-width: 300px;
 }
 .teacher-view {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100vw;
 }
 .icons {
   width: 50px;
 }
 .btn.btn-secondary {
-  margin-left: auto;
-  margin-top: 1rem;
-  margin-right: 1rem;
+  margin-bottom: 1rem;
+  font-size: large;
 }
 .btn.btn-primary {
-  margin: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: large;
 }
-.list-group-item {
-  min-height: 50px;
+.teacher-view .list-group-item {
+  height: 50px;
   min-width: 100px;
   font-size: 20px;
-  max-width: 200px;
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 260px;
+  overflow-wrap: break-word;
+  overflow-y: auto !important;
+}
+.settings-icons .list-group-item {
+  padding: 0.2rem;
 }

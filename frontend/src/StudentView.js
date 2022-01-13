@@ -2,8 +2,9 @@ import LanguageSelection from "./LanguageSelection.js";
 import Answer from "./Answer.js";
 import { ListGroup, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./StudentView.css";
+import ChooseCategory from "./ChooseCategory.js";
 const axios = require("axios").default;
 export default function StudentView() {
   const [words1, setWords1] = useState([]);
@@ -16,23 +17,30 @@ export default function StudentView() {
   const [hasAnswered, setHasAnswered] = useState(false);
   const [correctCount, setCorrectCount] = useState(null);
   const [correct, setCorrect] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  let category = searchParams.get("category");
+  console.log(searchParams.get("category"));
   var userWords = [];
   useEffect(() => {
-    axios
-      .get(`/api/${displayedLanguages.first}`)
-      .then((response) => {
-        setWords1(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [displayedLanguages.first]);
+    if (category !== null) {
+      axios
+        .get(`/api/${category}/${displayedLanguages.first}`)
+        .then((response) => {
+          setWords1(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [displayedLanguages.first, category]);
   useEffect(() => {
-    axios
-      .get(`/api/${displayedLanguages.second}`)
-      .then((response) => setWords2(response.data))
-      .catch((error) => console.log(error));
-  }, [displayedLanguages.second]);
+    if (category !== null) {
+      axios
+        .get(`/api/${category}/${displayedLanguages.second}`)
+        .then((response) => setWords2(response.data))
+        .catch((error) => console.log(error));
+    }
+  }, [displayedLanguages.second, category]);
   const handleClick = () => {
     if (hasAnswered) {
       window.location.reload(false);
@@ -65,71 +73,74 @@ export default function StudentView() {
   const goBack = () => {
     navigate("/");
   };
-
-  return words1.length !== 0 && words2.length !== 0 ? (
-    <div className="student-view">
-      <h1>
-        {`Translate words from ${displayedLanguages.first} to ${displayedLanguages.second}`}
-      </h1>
-      <div className="list-group-container">
-        <div className="word-container">
-          <LanguageSelection
-            setDisplayedLanguages={setDisplayedLanguages}
-            displayedLanguages={displayedLanguages}
-            languages={languages}
-            selected={displayedLanguages.first}
-            whichList={"first"}
-          />
-          <ListGroup>
-            {words1.map((word) => (
-              <ListGroup.Item key={word.id}>{word.word}</ListGroup.Item>
-            ))}
-          </ListGroup>
+  if (category === null) {
+    return <ChooseCategory></ChooseCategory>;
+  } else {
+    return words1.length !== 0 && words2.length !== 0 ? (
+      <div className="student-view">
+        <h1>
+          {`Translate words from ${displayedLanguages.first} to ${displayedLanguages.second}`}
+        </h1>
+        <div className="list-group-container">
+          <div className="word-container">
+            <LanguageSelection
+              setDisplayedLanguages={setDisplayedLanguages}
+              displayedLanguages={displayedLanguages}
+              languages={languages}
+              selected={displayedLanguages.first}
+              whichList={"first"}
+            />
+            <ListGroup>
+              {words1.map((word) => (
+                <ListGroup.Item key={word.id}>{word.word}</ListGroup.Item>
+              ))}
+            </ListGroup>
+          </div>
+          <div className="input-container">
+            <LanguageSelection
+              setDisplayedLanguages={setDisplayedLanguages}
+              displayedLanguages={displayedLanguages}
+              languages={languages}
+              selected={displayedLanguages.second}
+              whichList={"second"}
+            />
+            <ListGroup>
+              {words2.map((word, index) => (
+                <ListGroup.Item key={word.id}>
+                  <Answer
+                    color={
+                      hasAnswered && correct.includes(word.word.toLowerCase())
+                        ? "green"
+                        : hasAnswered && !correct.includes(word.word)
+                        ? "red"
+                        : "black"
+                    }
+                    userWords={userWords}
+                    index={index}
+                    word={word}
+                    hasAnswered={hasAnswered}
+                  />
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </div>
         </div>
-        <div className="input-container">
-          <LanguageSelection
-            setDisplayedLanguages={setDisplayedLanguages}
-            displayedLanguages={displayedLanguages}
-            languages={languages}
-            selected={displayedLanguages.second}
-            whichList={"second"}
-          />
-          <ListGroup>
-            {words2.map((word, index) => (
-              <ListGroup.Item key={word.id}>
-                <Answer
-                  color={
-                    hasAnswered && correct.includes(word.word.toLowerCase())
-                      ? "green"
-                      : hasAnswered && !correct.includes(word.word)
-                      ? "red"
-                      : "black"
-                  }
-                  userWords={userWords}
-                  index={index}
-                  word={word}
-                  hasAnswered={hasAnswered}
-                />
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </div>
+        <h3
+          style={
+            hasAnswered ? { visibility: "visible" } : { visibility: "hidden" }
+          }
+        >
+          You got {correctCount} right!
+        </h3>
+        <Button onClick={handleClick}>
+          {hasAnswered ? "Play again" : "Check answers"}
+        </Button>
+        <Button variant="secondary" onClick={goBack}>
+          Back
+        </Button>
       </div>
-      <h3
-        style={
-          hasAnswered ? { visibility: "visible" } : { visibility: "hidden" }
-        }
-      >
-        You got {correctCount} right!
-      </h3>
-      <Button onClick={handleClick}>
-        {hasAnswered ? "Play again" : "Check answers"}
-      </Button>
-      <Button variant="secondary" onClick={goBack}>
-        Back
-      </Button>
-    </div>
-  ) : (
-    <div />
-  );
+    ) : (
+      <div />
+    );
+  }
 }

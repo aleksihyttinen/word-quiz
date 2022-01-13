@@ -22,6 +22,20 @@ let connectionFuncs = {
       resolve("Connection closed");
     });
   },
+  getCategories: () => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT table_name FROM information_schema.tables
+          WHERE table_schema = 'dbqmalhy2';`,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(result);
+        }
+      );
+    });
+  },
   getAll: (category) => {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT * FROM ${category}`, (err, result) => {

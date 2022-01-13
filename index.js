@@ -8,6 +8,16 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static("frontend/build"));
 
+app.get("/api", async (req, res) => {
+  try {
+    let data = await connection.getCategories();
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 400;
+    res.end();
+  }
+});
 app.get("/api/:category", async (req, res) => {
   let category = req.params.category;
   try {

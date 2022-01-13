@@ -76,7 +76,7 @@ let connectionFuncs = {
   deleteWord: (id, category) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        `DELETE FROM ${category} WHERE words.id = ?`,
+        `DELETE FROM ${category} WHERE ${category}.id = ?`,
         id,
         (err, result) => {
           if (err) {
@@ -112,7 +112,7 @@ let connectionFuncs = {
   editWord: (id, word, category) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        `UPDATE ${category} SET english = ?, finnish = ?, swedish = ? WHERE words.id = ${id}`,
+        `UPDATE ${category} SET english = ?, finnish = ?, swedish = ? WHERE ${category}.id = ${id}`,
         word,
         (err, result) => {
           if (err) {

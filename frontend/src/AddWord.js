@@ -5,6 +5,10 @@ export default function AddWord(props) {
   const [showModal, setShow] = useState(false);
   let word = [];
   const saveWord = () => {
+    if (word.length !== 3) {
+      alert("Insert word in all three langauges");
+      return;
+    }
     axios
       .post(`/api`, word)
       .then((response) => {

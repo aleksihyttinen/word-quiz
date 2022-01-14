@@ -1,3 +1,4 @@
+/* Some basic css styling for main and login page */
 .app .btn.btn-primary {
   margin: 3rem 1rem 1rem 1rem;
   font-size: 50px;
@@ -27,6 +28,7 @@ h1 {
   margin-top: 2rem;
 }
 @media only screen and (min-width: 700px) {
+  /*If screen is over 700px wide, adjust button positioning*/
   .app .btn.btn-primary {
     margin: 4rem 1rem 1rem 1rem;
   }

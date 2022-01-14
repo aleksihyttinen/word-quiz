@@ -152,7 +152,13 @@ export default function StudentView() {
         <Button onClick={handleClick}>
           {hasAnswered ? "Play again" : "Check answers"}
         </Button>
-        <Button variant="secondary" onClick={() => setSearchParams()}>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setSearchParams();
+            setHasAnswered(false);
+          }}
+        >
           Back
         </Button>
       </div>

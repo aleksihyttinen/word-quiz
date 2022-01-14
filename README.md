@@ -7,9 +7,9 @@ This app is hosted at https://qmalhy-word-quiz.herokuapp.com/
 This app was created for my backend studies at Tampere University of Applied Sciences.
 
 # Screenshots
-![main-page](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/main-page.png?raw=true)
-![student-view](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/student-view.png?raw=true)
-![teacher-view](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/teacher-view.png?raw=true)
+![main-page](/screenshots/main-page.png)
+![student-view](screenshots/student-view.png)
+![teacher-view](screenshots/teacher-view.png)
 
 # Tech/Framework used
 Frontend: https://reactjs.org/  

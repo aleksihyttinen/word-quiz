@@ -7,11 +7,13 @@ This app is hosted at https://qmalhy-word-quiz.herokuapp.com/
 This app was created for my backend studies at Tampere University of Applied Sciences.
 
 # Screenshots
-TODO: Add screenshots
+![main-page](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/main-page.png?raw=true)
+![student-view](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/student-view.png?raw=true)
+![teacher-view](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/teacher-view.png?raw=true)
 
 # Tech/Framework used
-Frontend: https://reactjs.org/
-Backend: https://nodejs.org/en/
+Frontend: https://reactjs.org/  
+Backend: https://nodejs.org/en/  
          https://www.npmjs.com/package/express
 
 # Features
@@ -28,7 +30,24 @@ The user can also add, edit or delete words in the Teacher view.
 6. Navigate to localhost:8080 in your browser
 
 # How to use
-TODO: Add screenshots and instructions
+HOW TO PLAY  
+Go to the user view and select you category. Check which languages are selected and insert the words in the language asked.  
+CHANGE LANGUAGES  
+Click the drop-down menu on top of a list and select a new language  
+ADD NEW WORD  
+Click the add new word button in teacher view and enter word in all languages  
+![add-word](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/add-word.png?raw=true)
+EDIT WORD  
+Click the pen icon next to the word in teacher view  
+![edit-word](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/edit-word.png?raw=true)
+DELETE WORD  
+Click the X icon next to the word  
+SELECT CATEGORY  
+In student view, click a category name  
+![choose-category](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/choose-category.png?raw=true)
+In teacher view, select category from the drop-down menu  
+![select-category](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/select-category.png?raw=true)
+
 
 # License
 MIT © Aleksi Hyttinen

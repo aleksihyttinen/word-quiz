@@ -1,16 +1,4 @@
-.input-container {
-  margin-right: auto;
-}
-.input-container .list-group-item {
-  height: 50px;
-  width: 100%;
-}
-.student-view > .list-group-container {
-  width: 95%;
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.5rem;
-}
+/*Overall styling for student view*/
 .student-view {
   display: flex;
   align-items: center;
@@ -18,32 +6,10 @@
   flex-direction: column;
   max-width: 100vw;
 }
-.word-container .list-group-item {
-  font-size: 20px;
-  height: 50px;
-  width: 100%;
-  line-height: 100%;
-  padding-top: 0.75rem;
-  overflow-y: auto !important;
-  max-width: 260px;
-}
-input {
-  width: 100%;
-  height: 100%;
-}
-.modal-body {
-  display: flex;
-  flex-direction: column;
-}
 .student-view h1 {
   min-height: 70px;
   text-align: center;
   margin-top: 2rem;
-}
-.word-container {
-  width: 60%;
-  overflow-wrap: break-word;
-  margin-left: auto;
 }
 .student-view .btn.btn-secondary {
   margin-bottom: 1rem;
@@ -56,6 +22,46 @@ input {
 h3 {
   margin: 1rem;
 }
+/*Styling for the input fields in student view*/
+.input-container {
+  margin-right: auto;
+}
+.input-container .list-group-item {
+  height: 50px;
+  width: 100%;
+}
+input {
+  width: 100%;
+  height: 100%;
+}
+
+/*Styling for the words in student view*/
+.student-view > .list-group-container {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5rem;
+}
+.word-container .list-group-item {
+  font-size: 20px;
+  height: 50px;
+  width: 100%;
+  line-height: 100%;
+  padding-top: 0.75rem;
+  overflow-y: auto !important;
+  max-width: 260px;
+}
+.word-container {
+  width: 60%;
+  overflow-wrap: break-word;
+  margin-left: auto;
+}
+/*Styling for modals*/
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+/*Styling for the choose category page*/
 .category-view {
   display: flex;
   flex-direction: column;
@@ -83,16 +89,15 @@ h3 {
 .category-view h1 {
   margin-top: 5rem;
 }
+
 @media only screen and (min-width: 700px) {
+  /*Change layout and font sizes on screens over the width of 700px*/
   .student-view > .list-group-container {
     max-width: 960px;
     width: auto;
     display: flex;
     flex-direction: row;
     margin-top: 0.5rem;
-  }
-  .word-container {
-    width: auto;
   }
   .student-view .btn.btn-secondary {
     position: absolute;
@@ -103,6 +108,12 @@ h3 {
     margin-right: 1rem;
     font-size: x-large;
   }
+  .student-view .btn.btn-primary {
+    font-size: x-large;
+  }
+  .word-container {
+    width: auto;
+  }
   .category-view .btn.btn-secondary {
     position: absolute;
     top: 1rem;
@@ -110,9 +121,6 @@ h3 {
     margin-left: auto;
     margin-top: 1rem;
     margin-right: 1rem;
-    font-size: x-large;
-  }
-  .student-view .btn.btn-primary {
     font-size: x-large;
   }
   .choose-category {

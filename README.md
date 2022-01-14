@@ -1,7 +1,10 @@
 # Word Quiz
-This project is a language learning app where user can practice words  
+This project is a language learning app where user can practice words
 from different categories in English, Finnish and Swedish.  
+  
 This app is hosted at https://qmalhy-word-quiz.herokuapp.com/
+  
+Screencast: [![youtube link](https://img.youtube.com/vi/bJ1VL5N-ZVU/0.jpg)](https://www.youtube.com/watch?v=bJ1VL5N-ZVU)
 
 # Motivation
 This app was created for my backend studies at Tampere University of Applied Sciences.
@@ -13,13 +16,11 @@ This app was created for my backend studies at Tampere University of Applied Sci
 
 # Tech/Framework used
 Frontend: https://reactjs.org/  
-Backend: https://nodejs.org/en/  
-         https://www.npmjs.com/package/express
+Backend: https://nodejs.org/en/ https://www.npmjs.com/package/express
 
 # Features
-There are five different categories of words (ex. food, colors) 
-in three different languages, that the user can practice with.
-The user can also add, edit or delete words in the Teacher view.
+There are five different categories of words (ex. food, colors) in three different languages,  
+that the user can practice with. The user can also add, edit or delete words in the Teacher view.
 
 # Installation
 1. Copy and unpack the project

@@ -21,7 +21,7 @@ export default function AddWord(props) {
     }
     if (trimmed) {
       axios
-        .post(`http://localhost:8080/api/${props.category}`, wordArray)
+        .post(`/api/${props.category}`, wordArray)
         .then((response) => {
           props.setEdited(true);
           console.log(response);

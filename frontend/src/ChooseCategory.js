@@ -12,7 +12,7 @@ export default function ChooseCategory(props) {
   useEffect(() => {
     //Fetch categories
     axios
-      .get(`http://localhost:8080/api/`)
+      .get(`/api/`)
       .then((response) => {
         setCategories(response.data);
       })

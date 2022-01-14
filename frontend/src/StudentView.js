@@ -27,9 +27,7 @@ export default function StudentView() {
     //Fetches the words that are shown
     if (category !== null) {
       axios
-        .get(
-          `http://localhost:8080/api/${category}/${displayedLanguages.first}`
-        )
+        .get(`/api/${category}/${displayedLanguages.first}`)
         .then((response) => {
           setWords1(response.data);
         })
@@ -42,9 +40,7 @@ export default function StudentView() {
     //Fetches the correct words user is trying to guess
     if (category !== null) {
       axios
-        .get(
-          `http://localhost:8080/api/${category}/${displayedLanguages.second}`
-        )
+        .get(`/api/${category}/${displayedLanguages.second}`)
         .then((response) => setWords2(response.data))
         .catch((error) => console.log(error));
     }

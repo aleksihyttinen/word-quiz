@@ -1,6 +1,7 @@
 # Word Quiz
-This project is a language learning app where user can practice words
-from different categories in English, Finnish and Swedish.
+This project is a language learning app where user can practice words  
+from different categories in English, Finnish and Swedish.  
+This app is hosted at https://qmalhy-word-quiz.herokuapp.com/
 
 # Motivation
 This app was created for my backend studies at Tampere University of Applied Sciences.

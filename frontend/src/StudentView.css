@@ -56,11 +56,6 @@ input {
   overflow-wrap: break-word;
   margin-left: auto;
 }
-/*Styling for modals*/
-.modal-body {
-  display: flex;
-  flex-direction: column;
-}
 /*Styling for the choose category page*/
 .category-view {
   display: flex;

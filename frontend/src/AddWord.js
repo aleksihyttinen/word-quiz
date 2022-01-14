@@ -5,18 +5,25 @@ export default function AddWord(props) {
   const [showModal, setShow] = useState(false);
   let word = [];
   const saveWord = () => {
+    let trimmed = false;
     if (word.length !== 3) {
       alert("Insert word in all three langauges");
       return;
     }
-    axios
-      .post(`/api/${props.category}`, word)
-      .then((response) => {
-        props.setEdited(true);
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-    setShow(false);
+    for (let i = 0; i < word.length; i++) {
+      word[i] = word[i].trimStart().trimEnd();
+      trimmed = true;
+    }
+    if (trimmed) {
+      axios
+        .post(`http://localhost:8080/api/${props.category}`, word)
+        .then((response) => {
+          props.setEdited(true);
+          console.log(response);
+        })
+        .catch((err) => console.log(err));
+      setShow(false);
+    }
   };
   return (
     <>

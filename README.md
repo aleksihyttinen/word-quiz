@@ -20,10 +20,11 @@ The user can also add, edit or delete words in the Teacher view.
 
 # Installation
 1. Copy and unpack the project
-2. Open command prompt and go into fullstack-project-2021/frontend and insert command npm i, then npm run-script build
-3. Go back to fullstack-project-2021 and insert command npm i. 
-  Then insert command "Nodemon index.js" (If you don't have nodemon installed > npm i nodemon)
-4. Navigate to localhost:8080 in your browser
+2. Open command prompt and go into fullstack-project-2021-main and insert command npm install
+3. Go to fullstack-project-2021-main/frontend and insert command npm install and then npm run-scripts build
+4. Go back to fullstack-project-2021-main and create a .env file which contains needed env keys in db.js
+5. Insert command nodemon index.js
+6. Navigate to localhost:8080 in your browser
 
 # How to use
 TODO: Add screenshots and instructions

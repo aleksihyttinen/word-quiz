@@ -4,11 +4,13 @@ const connection = require("./db.js");
 const cors = require("cors");
 const path = require("path");
 
-app.use(express.json());
-app.use(cors());
-app.use(express.static("frontend/build"));
+//Middleware
+app.use(express.json()); //Parses post requests to json
+app.use(cors()); //Handles cors policy
+app.use(express.static("frontend/build")); //Uses frontend
 
 app.get("/api", async (req, res) => {
+  //Gets all categories available and returns them
   try {
     let data = await connection.getCategories();
     res.send(data);
@@ -19,18 +21,19 @@ app.get("/api", async (req, res) => {
   }
 });
 app.get("/api/:category", async (req, res) => {
+  //Gets all words in a category and returns them
   let category = req.params.category;
   try {
-    let data = await connection.getAll(category);
+    let data = await connection.getByCategory(category);
     res.send(data);
   } catch (err) {
     console.log(err);
-    res.statusCode = 400;
+    res.statusCode = 404;
     res.end();
   }
 });
 app.get("/api/:category/:language", async (req, res) => {
-  console.log(req.params);
+  //Gets all words in a certain language from category and returns them
   let category = req.params.category;
   let language = req.params.language;
   try {
@@ -38,11 +41,12 @@ app.get("/api/:category/:language", async (req, res) => {
     res.send(data);
   } catch (err) {
     console.log(err);
-    res.statusCode = 400;
+    res.statusCode = 404;
     res.end();
   }
 });
 app.get("/api/:category/id/:id", async (req, res) => {
+  //Gets a word in all languages by id and returns them
   let category = req.params.category;
   let id = req.params.id;
   try {
@@ -55,6 +59,7 @@ app.get("/api/:category/id/:id", async (req, res) => {
   }
 });
 app.post("/api/:category", async (req, res) => {
+  //Posts a new word and it's translations to a category
   let category = req.params.category;
   let word = req.body;
   try {
@@ -73,6 +78,7 @@ app.post("/api/:category", async (req, res) => {
   }
 });
 app.delete("/api/:category/:id", async (req, res) => {
+  //Deletes a word by id from a category
   let category = req.params.category;
   let id = req.params.id;
   try {
@@ -89,6 +95,7 @@ app.delete("/api/:category/:id", async (req, res) => {
   }
 });
 app.put("/api/:category/:id", async (req, res) => {
+  //Edits a word by id from a category
   let category = req.params.category;
   let id = req.params.id;
   let word = req.body;
@@ -109,9 +116,11 @@ app.put("/api/:category/:id", async (req, res) => {
   }
 });
 app.get("*", (req, res) => {
+  //If url is anything else than the ones specified for backend, return frontend app
   res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
 });
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
+  //Starts the server
   console.log(`Listening on port ${server.address().port}`);
 });

@@ -7,7 +7,7 @@ export default function ChooseCategory(props) {
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     axios
-      .get(`/api/`)
+      .get(`http://localhost:8080/api/`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -16,11 +16,19 @@ export default function ChooseCategory(props) {
       });
   }, []);
   if (props.view === "teacher") {
-    return categories.map((category) => (
-      <option key={category.table_name} value={category.table_name}>
-        {category.table_name}
-      </option>
-    ));
+    return (
+      <select //TODO KORJAA VALUE
+        value={props.category}
+        onChange={(e) => props.setSearchParams({ category: e.target.value })}
+        title="categories"
+      >
+        {categories.map((category) => (
+          <option key={category.table_name} value={category.table_name}>
+            {category.table_name}
+          </option>
+        ))}
+      </select>
+    );
   } else {
     return categories.length !== 0 ? (
       <div className="choose-category">

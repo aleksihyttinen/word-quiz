@@ -13,11 +13,11 @@ export default function TeacherView() {
   const [words, setWords] = useState([]);
   const [edited, setEdited] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [category, setCategory] = useState("animals");
+  const [category, setCategory] = useState(null);
   useEffect(() => {
     if (category !== null) {
       axios
-        .get(`/api/${category}`)
+        .get(`http://localhost:8080/api/${category}`)
         .then((response) => {
           setWords(response.data);
           setEdited(false);
@@ -63,13 +63,11 @@ export default function TeacherView() {
       <AddWord category={category} setEdited={setEdited} />
       <div className="info">
         <span>Select category: </span>
-        <select
-          defaultValue={category}
-          onChange={(e) => setSearchParams({ category: e.target.value })}
-          name="languages"
-        >
-          <ChooseCategory view="teacher" />
-        </select>
+        <ChooseCategory
+          view="teacher"
+          category={category}
+          setSearchParams={setSearchParams}
+        />
         <p className="mobile-info">
           {"On mobile you can scroll the list <-> to see more"}
         </p>

@@ -24,7 +24,9 @@ export default function StudentView() {
   useEffect(() => {
     if (category !== null) {
       axios
-        .get(`/api/${category}/${displayedLanguages.first}`)
+        .get(
+          `http://localhost:8080/api/${category}/${displayedLanguages.first}`
+        )
         .then((response) => {
           setWords1(response.data);
         })
@@ -36,7 +38,9 @@ export default function StudentView() {
   useEffect(() => {
     if (category !== null) {
       axios
-        .get(`/api/${category}/${displayedLanguages.second}`)
+        .get(
+          `http://localhost:8080/api/${category}/${displayedLanguages.second}`
+        )
         .then((response) => setWords2(response.data))
         .catch((error) => console.log(error));
     }
@@ -57,11 +61,12 @@ export default function StudentView() {
       let temp = [];
       for (let i = 0; i < words2.length; i++) {
         if (userWords[i] !== undefined) {
-          let trimmedWord = userWords[i].replace(/\s/g, "").toLowerCase();
-          console.log(trimmedWord);
-          if (words2[i].word.toLowerCase() === trimmedWord) {
+          let whitespaceRemoved = userWords[i].trimStart().trimEnd();
+          if (
+            words2[i].word.toLowerCase() === whitespaceRemoved.toLowerCase()
+          ) {
             count++;
-            temp.push(trimmedWord);
+            temp.push(whitespaceRemoved.toLowerCase());
           }
         }
       }

@@ -36,17 +36,17 @@ CHANGE LANGUAGES
 Click the drop-down menu on top of a list and select a new language  
 ADD NEW WORD  
 Click the add new word button in teacher view and enter word in all languages  
-![add-word](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/add-word.png?raw=true)
+![add-word](screenshots/add-word.png)
 EDIT WORD  
 Click the pen icon next to the word in teacher view  
-![edit-word](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/edit-word.png?raw=true)
+![edit-word](screenshots/edit-word.png)
 DELETE WORD  
 Click the X icon next to the word  
 SELECT CATEGORY  
 In student view, click a category name  
-![choose-category](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/choose-category.png?raw=true)
+![choose-category](screenshots/choose-category.png)
 In teacher view, select category from the drop-down menu  
-![select-category](https://github.com/aleksihyttinen/fullstack-project-2021/tree/main/screenshots/select-category.png?raw=true)
+![select-category](screenshots/select-category.png)
 
 
 # License

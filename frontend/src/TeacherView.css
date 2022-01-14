@@ -1,38 +1,8 @@
+/*Overall styling for teacher view*/
 .react-icons {
   vertical-align: middle;
   margin: 5px;
   cursor: pointer;
-}
-.form-label {
-  margin-left: 1rem;
-}
-.form-control {
-  margin-left: 1rem;
-  width: 90%;
-}
-.modal {
-  width: 100vw;
-}
-.modal-header {
-  margin-bottom: 1rem;
-}
-.modal-footer {
-  margin-top: 1rem;
-}
-.teacher-view .list-group-container {
-  display: flex;
-  flex-direction: row;
-  width: 95%;
-  margin-bottom: 1rem;
-}
-.mobile-info {
-  margin-bottom: 0;
-  opacity: 0.75;
-}
-.scrollable {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
 }
 .teacher-view {
   display: flex;
@@ -41,12 +11,11 @@
   flex-direction: column;
   width: 100vw;
 }
-.settings-icons .list-group-item {
-  width: 70px;
-}
-.teacher-view .btn.btn-secondary {
+.teacher-view .list-group-container {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
   margin-bottom: 1rem;
-  font-size: large;
 }
 .teacher-view .btn.btn-primary {
   margin-top: 1rem;
@@ -61,13 +30,51 @@
   overflow-wrap: break-word;
   overflow-y: auto !important;
 }
-.settings-icons .list-group-item {
-  padding: 0.2rem;
-}
 .teacher-view .info {
   width: 95%;
 }
+.teacher-view .btn.btn-secondary {
+  margin-bottom: 1rem;
+  font-size: large;
+}
+.scrollable {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+.settings-icons .list-group-item {
+  width: 70px;
+}
+.settings-icons .list-group-item {
+  padding: 0.2rem;
+}
+/*Styling for modals*/
+.form-label {
+  margin-left: 1rem;
+}
+.form-control {
+  margin-left: 1rem;
+  width: 90%;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+.modal {
+  width: 100vw;
+}
+.modal-header {
+  margin-bottom: 1rem;
+}
+.modal-footer {
+  margin-top: 1rem;
+}
+.mobile-info {
+  margin-bottom: 0;
+  opacity: 0.75;
+}
 @media only screen and (min-width: 700px) {
+  /*Change layout and font sizes on screens over the width of 700px*/
   .mobile-info {
     display: none;
   }

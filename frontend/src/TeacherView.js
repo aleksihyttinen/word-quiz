@@ -9,12 +9,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import "./TeacherView.css";
 import ChooseCategory from "./ChooseCategory.js";
 const axios = require("axios").default;
+
 export default function TeacherView() {
+  //Returns the teacher view page, where user can add, edit and delete words
   const [words, setWords] = useState([]);
   const [edited, setEdited] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [category, setCategory] = useState(null);
   useEffect(() => {
+    //If category is selected fetch all words in category
     if (category !== null) {
       axios
         .get(`http://localhost:8080/api/${category}`)
@@ -27,13 +30,18 @@ export default function TeacherView() {
         });
     }
   }, [edited, category]);
+
   useEffect(() => {
+    //Set animals as default category in searchParams if a category isn't selected
     if (searchParams.get("category") === null) {
       setSearchParams({ category: "animals" });
     }
+    //if searchParams change, get the category from them and set it as current category
     setCategory(searchParams.get("category"));
   }, [searchParams, setSearchParams]);
+
   const removeWord = (id) => {
+    //Send delete request to the backend with the word id
     if (
       window.confirm(
         "Are you sure you want to delete this word and it's translations?"
@@ -50,14 +58,17 @@ export default function TeacherView() {
       return;
     }
   };
-  const { signout } = useAuth();
-  const navigate = useNavigate();
+  const { signout } = useAuth(); //Get function signin from useAuth
+  const navigate = useNavigate(); //https://reactrouter.com/docs/en/v6/api#usenavigate
   const handleSignout = () => {
+    //If the button is clicked, signout from auth and navigate to main page
     signout();
     navigate("/");
   };
 
   return words.length !== 0 ? (
+    //Once the words have been fetched, render listgroups,
+    // which contain the word in all languages and buttons to edit or delete them
     <div className="teacher-view">
       <h1>Here you can add, edit, or delete words.</h1>
       <AddWord category={category} setEdited={setEdited} />
@@ -158,6 +169,7 @@ export default function TeacherView() {
       </Button>
     </div>
   ) : (
+    //If words haven't been fetched yet, render a empty div
     <div />
   );
 }

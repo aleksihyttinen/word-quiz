@@ -2,7 +2,8 @@
 This project is a language learning app where user can practice words
 from different categories in English, Finnish and Swedish.  
   
-This app is hosted at https://qmalhy-word-quiz.herokuapp.com/
+This app is hosted at https://qmalhy-word-quiz.herokuapp.com/  
+  Password to the teacher view = password  
   
 Screencast:  
 [![youtube link](https://img.youtube.com/vi/bJ1VL5N-ZVU/0.jpg)](https://www.youtube.com/watch?v=bJ1VL5N-ZVU)

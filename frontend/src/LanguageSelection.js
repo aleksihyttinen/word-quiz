@@ -1,8 +1,7 @@
 export default function LanguageSelection(props) {
+  //Returns a select with all available languages as options
   const changeLanguage = (e) => {
-    if (props.whichList === undefined) {
-      props.setDisplayedLanguage(e.target.value);
-    }
+    //Sets changed language to the corresponding list
     if (props.whichList === "first") {
       props.setDisplayedLanguages({
         first: e.target.value,
@@ -23,6 +22,8 @@ export default function LanguageSelection(props) {
       name="languages"
     >
       {props.languages.map((language) => {
+        //Blocks user from selecting same language to both lists
+        //by disabling the option which is selected on the other list
         return (props.whichList === "second" &&
           language === props.displayedLanguages.first) ||
           (props.whichList === "first" &&

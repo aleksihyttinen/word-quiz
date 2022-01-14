@@ -6,22 +6,25 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import "./StudentView.css";
 import ChooseCategory from "./ChooseCategory.js";
 const axios = require("axios").default;
+
 export default function StudentView() {
-  const [words1, setWords1] = useState([]);
-  const [words2, setWords2] = useState([]);
-  const languages = ["english", "finnish", "swedish"];
+  //Returns the student view page, where user can play word quiz
+  const [words1, setWords1] = useState([]); //Holds the words of the two languages
+  const [words2, setWords2] = useState([]); //The user has selected
+  const languages = ["english", "finnish", "swedish"]; //Available languages
   const [displayedLanguages, setDisplayedLanguages] = useState({
     first: languages[0],
     second: languages[1],
-  });
-  const [hasAnswered, setHasAnswered] = useState(false);
-  const [correctCount, setCorrectCount] = useState(null);
-  const [correct, setCorrect] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  let category = searchParams.get("category");
-  const navigate = useNavigate();
-  var userWords = [];
+  }); //Displayed langauges
+  const [hasAnswered, setHasAnswered] = useState(false); //Changes to true if user has submitted answers
+  const [correctCount, setCorrectCount] = useState(null); //Amount of correct answers
+  const [correct, setCorrect] = useState([]); //Array of user submitted correct answers
+  const [searchParams, setSearchParams] = useSearchParams(); //https://reactrouter.com/docs/en/v6/api#usesearchparams
+  let category = searchParams.get("category"); //Gets category from searchParams
+  const navigate = useNavigate(); //https://reactrouter.com/docs/en/v6/api#usenavigate
+  var userWords = []; //Array of user inputs
   useEffect(() => {
+    //Fetches the words that are shown
     if (category !== null) {
       axios
         .get(
@@ -36,6 +39,7 @@ export default function StudentView() {
     }
   }, [displayedLanguages.first, category]);
   useEffect(() => {
+    //Fetches the correct words user is trying to guess
     if (category !== null) {
       axios
         .get(
@@ -47,12 +51,15 @@ export default function StudentView() {
   }, [displayedLanguages.second, category]);
   const handleClick = () => {
     if (hasAnswered) {
+      //If user clicks the button after checking answers, reload the page to play again
+      //(This should really only clear the input fields, this is a bad solution for a restart)
       window.location.reload(false);
     } else {
       checkAnswers();
     }
   };
   const checkAnswers = () => {
+    //Compares user inputs to the correct answers held in words2
     if (userWords.length === 0) {
       alert("Please insert your answers");
     } else {
@@ -70,11 +77,12 @@ export default function StudentView() {
           }
         }
       }
-      setCorrect(temp);
-      setCorrectCount(count);
+      setCorrect(temp); //Saves the correct inputs
+      setCorrectCount(count); //Saves the count of correct answers
     }
   };
   if (category === null) {
+    //If category isn't found, render a choose category page
     return (
       <div className="category-view">
         <h1>Choose category:</h1>
@@ -85,6 +93,9 @@ export default function StudentView() {
       </div>
     );
   } else {
+    //Once words have been fetched, render a page that displays two list groups
+    //First one holds the words that you are trying to guess in a different language
+    //Second one holds input fields for the users answers
     return words1.length !== 0 && words2.length !== 0 ? (
       <div className="student-view">
         <h1>
@@ -139,6 +150,7 @@ export default function StudentView() {
             hasAnswered ? { visibility: "visible" } : { visibility: "hidden" }
           }
         >
+          {/*Display the amount of correct answers*/}
           You got {correctCount} right!
         </h3>
         <Button onClick={handleClick}>
@@ -149,6 +161,7 @@ export default function StudentView() {
         </Button>
       </div>
     ) : (
+      //If words haven't been fetched yet, render a empty div
       <div />
     );
   }

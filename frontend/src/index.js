@@ -7,13 +7,17 @@ import TeacherView from "./TeacherView.js";
 import Login from "./Login.js";
 import { ProvideAuth } from "./useAuth";
 import { useAuth } from "./useAuth";
+
 function RequireAuth({ children }) {
+  //Get current auth status from useAuth hook and route accordingly
   const { isAuth } = useAuth();
   let auth = isAuth();
+  //If authorized route to oroginal route, else route to login page
   return auth ? children : <Navigate to="/login" replace />;
 }
 
 ReactDOM.render(
+  //Provide routes for different urls and render accordingly
   <ProvideAuth>
     <BrowserRouter>
       <Routes>

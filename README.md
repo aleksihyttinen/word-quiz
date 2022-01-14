@@ -32,22 +32,27 @@ The user can also add, edit or delete words in the Teacher view.
 # How to use
 HOW TO PLAY  
 Go to the user view and select you category. Check which languages are selected and insert the words in the language asked.  
+  
 CHANGE LANGUAGES  
 Click the drop-down menu on top of a list and select a new language  
+  
 ADD NEW WORD  
 Click the add new word button in teacher view and enter word in all languages  
 ![add-word](screenshots/add-word.png)
+  
 EDIT WORD  
 Click the pen icon next to the word in teacher view  
 ![edit-word](screenshots/edit-word.png)
+  
 DELETE WORD  
 Click the X icon next to the word  
+  
 SELECT CATEGORY  
 In student view, click a category name  
 ![choose-category](screenshots/choose-category.png)
 In teacher view, select category from the drop-down menu  
 ![select-category](screenshots/select-category.png)
-
+  
 
 # License
 MIT © Aleksi Hyttinen

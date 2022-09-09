@@ -30,7 +30,7 @@ let connectionFuncs = {
     return new Promise((resolve, reject) => {
       pool.query(
         `SELECT table_name FROM information_schema.tables
-          WHERE table_schema = 'dbqmalhy2';`,
+          WHERE table_schema = 'dbqmalhy2' AND table_name != 'users';`,
         (err, result) => {
           if (err) {
             reject(err);
